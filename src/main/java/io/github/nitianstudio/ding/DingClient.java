@@ -1,13 +1,7 @@
 package io.github.nitianstudio.ding;
 
-import io.github.nitianstudio.ding.block.render.ForgeAnvilRender;
-import io.github.nitianstudio.ding.block.tile.ForgeAnvilTileEntity;
-import io.github.nitianstudio.ding.registry.RegistryBlockTile;
+import io.github.nitianstudio.ding.registry.RegistryBlockRender;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -30,7 +24,10 @@ public class DingClient {
     @SuppressWarnings("unchecked")
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType<? extends ForgeAnvilTileEntity>) RegistryBlockTile.forge_anvil.get(), context -> new ForgeAnvilRender());
+        for (RegistryBlockRender value : RegistryBlockRender.values()) {
+            value.get().event(event);
+        }
     }
+
 
 }

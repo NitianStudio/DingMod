@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 import static io.github.nitianstudio.ding.registry.AllRegistry.BLOCKS;
 
 public enum RegistryBlock implements Supplier<Block> {
-    forge_anvil(ForgeAnvilBlock::new);
+    forge_anvil_block(ForgeAnvilBlock::new);
     public final DeferredBlock<Block> block;
 
     RegistryBlock(Function<BlockBehaviour.Properties, Block> function) {

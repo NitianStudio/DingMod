@@ -1,6 +1,7 @@
 package io.github.nitianstudio.data.lang;
 
 import io.github.nitianstudio.ding.registry.RegistryBlock;
+import io.github.nitianstudio.ding.registry.RegistryGroup;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
@@ -13,6 +14,7 @@ public class EnglishUS extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add(RegistryBlock.forge_anvil.get(), "forge anvil block");
+        add(RegistryBlock.forge_anvil_block.get(), "forge anvil block");
+        add(RegistryGroup.ding.get().getDisplayName().getString(), "ding");
     }
 }

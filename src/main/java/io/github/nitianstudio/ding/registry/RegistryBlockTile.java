@@ -8,14 +8,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.function.Supplier;
 
 import static io.github.nitianstudio.ding.registry.AllRegistry.TILES;
 
 public enum RegistryBlockTile implements Supplier<BlockEntityType<? extends BlockEntity>> {
-    forge_anvil(ForgeAnvilTileEntity::new, RegistryBlock.forge_anvil);
+    forge_anvil_block(ForgeAnvilTileEntity::new, RegistryBlock.forge_anvil_block);
     public final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends BlockEntity>> tileType;
     @SafeVarargs
     RegistryBlockTile(BlockEntityType.BlockEntitySupplier<? extends BlockEntity> factory, Supplier<Block>... blocks) {

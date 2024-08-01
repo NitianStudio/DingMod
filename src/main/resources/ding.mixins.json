@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "ding.refmap.json",
   "mixins": [
+    "AnimationControllerMixin"
   ],
   "client": [
   ],
