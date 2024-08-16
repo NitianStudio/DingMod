@@ -24,6 +24,12 @@ public class DefaultModel<T extends GeoAnimatable> extends GeoModel<T> {
                 ResourceLocation.fromNamespaceAndPath(MODID, mta[2])
                 :emptyAnimation;
     }
+
+    public DefaultModel(Class<T> clazz) {// model, texture, animation
+        model = emptyModel;
+        texture = emptyTexture;
+        animation = emptyAnimation;
+    }
     @Override
     public ResourceLocation getModelResource(T animatable) {
         return model;

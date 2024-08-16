@@ -13,31 +13,15 @@ import java.util.function.Supplier;
 
 import static io.github.nitianstudio.ding.registry.AllRegistry.TILES;
 
-public enum RegistryBlockTile implements Supplier<BlockEntityType<? extends BlockEntity>> {
-    forge_anvil_block(ForgeAnvilTileEntity::new, RegistryBlock.forge_anvil_block);
-    public final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends BlockEntity>> tileType;
-    @SafeVarargs
-    RegistryBlockTile(BlockEntityType.BlockEntitySupplier<? extends BlockEntity> factory, Supplier<Block>... blocks) {
-        this(factory, DSL.remainderType(), blocks);
-    }
+public class RegistryBlockTile {
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ForgeAnvilTileEntity>> forge_anvil_block =
+            TILES.register("forge_anvil_block", factory ->
+                    BlockEntityType.Builder
+                            .of(ForgeAnvilTileEntity::new,
+                                    RegistryBlock.forge_anvil_block.get()).build(DSL.remainderType()));
 
-    @SafeVarargs
-    RegistryBlockTile(BlockEntityType.BlockEntitySupplier<? extends BlockEntity> factory, Type<?> type, Supplier<Block>... blocks) {
-        tileType = TILES.register(name().toLowerCase(Locale.ROOT), () -> {
-            Block[] list = new Block[blocks.length];
-            for (int i = 0; i < blocks.length; i++) {
-                list[i] = blocks[i].get();
-            }
-            return BlockEntityType.Builder.of(factory, list).build(type);
-        });
-    }
 
     public static void registry() {
 
-    }
-
-    @Override
-    public BlockEntityType<? extends BlockEntity> get() {
-        return tileType.get();
     }
 }

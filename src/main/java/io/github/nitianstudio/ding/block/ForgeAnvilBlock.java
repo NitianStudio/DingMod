@@ -117,7 +117,8 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
 
     //使用方块
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    @NotNull
+    protected InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos, Player player, BlockHitResult hitResult) {
         Optional<ForgeAnvilTileEntity> blockEntity = level.getBlockEntity(pos, (BlockEntityType<ForgeAnvilTileEntity>) RegistryBlockTile.forge_anvil_block.get());
         blockEntity.ifPresent(entity -> {
             ItemStack mainHandItem = player.getMainHandItem();

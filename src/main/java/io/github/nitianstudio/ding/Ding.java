@@ -34,7 +34,6 @@ public class Ding
     public Ding(IEventBus modEventBus, ModContainer modContainer)
     {
         AllRegistry.registry(modEventBus);
-
         new DingModEvent(modEventBus);
         new DingMCEvent(NeoForge.EVENT_BUS);
         Config.registry(modContainer);
