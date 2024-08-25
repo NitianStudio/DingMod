@@ -16,8 +16,8 @@ public enum RegistryGroup implements Supplier<CreativeModeTab> {
     ding(builder -> builder
             .title(Component.translatable("itemGroup.ding"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(RegistryItem.forge_anvil_block.get()::getDefaultInstance).displayItems((parameters, output) -> {
-                output.accept(RegistryItem.forge_anvil_block.get());
+            .icon(RegistryItem.forge_anvil_block.asItem()::getDefaultInstance).displayItems((parameters, output) -> {
+                output.accept(RegistryItem.forge_anvil_block);
             })
     );
     public final DeferredHolder<CreativeModeTab, CreativeModeTab> group;

@@ -1,13 +1,13 @@
 package io.github.nitianstudio.ding.event;
 
+import io.github.nitianstudio.ding.Const;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
 
-public class DingModEvent {
+public class DingModEvent implements Const {
     public DingModEvent(IEventBus modEventBus) {
         modEventBus.register(this);
     }

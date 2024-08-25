@@ -1,5 +1,6 @@
 package io.github.nitianstudio.ding.event;
 
+import io.github.nitianstudio.ding.Const;
 import io.github.nitianstudio.ding.block.ForgeAnvilBlock;
 import io.github.nitianstudio.ding.item.ForgeIngot;
 import io.github.nitianstudio.ding.registry.RegistryBlock;
@@ -17,9 +18,8 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
 
-public class DingMCEvent {
+public class DingMCEvent implements Const {
     public DingMCEvent(IEventBus forgeBus) {
         forgeBus.register(this);
     }

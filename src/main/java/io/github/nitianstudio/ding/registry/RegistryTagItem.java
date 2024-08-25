@@ -11,7 +11,23 @@ import java.util.function.Supplier;
 import static io.github.nitianstudio.ding.Ding.MODID;
 
 public enum RegistryTagItem implements Supplier<TagKey<Item>> {
-    ingot;
+    ding,
+    ingot,
+    diamond,
+    gem,
+    pickaxe,
+    shovel,
+    axe,
+    sword,
+    hoe,
+    chest,
+    helmet,
+    legging,
+    boot,
+    body,
+    nugget,
+    star,
+    ;
 
     private final TagKey<Item> tag;
     RegistryTagItem() {

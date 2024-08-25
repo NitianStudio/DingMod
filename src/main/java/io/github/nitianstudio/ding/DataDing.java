@@ -1,17 +1,14 @@
 package io.github.nitianstudio.ding;
 
-import io.github.nitianstudio.data.lang.EnglishUS;
-import io.github.nitianstudio.data.lang.SimpleChinese;
-import net.minecraft.core.HolderLookup;
+import io.github.nitianstudio.ding.data.lang.EnglishUnitedStatesOfAmerica;
+import io.github.nitianstudio.ding.data.lang.SimpleChinese;
+import io.github.nitianstudio.ding.data.tag.BlockTagGeneration;
+import io.github.nitianstudio.ding.data.tag.ItemTagGeneration;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-
-import java.util.concurrent.CompletableFuture;
 
 import static io.github.nitianstudio.ding.Ding.MODID;
 
@@ -21,9 +18,10 @@ public class DataDing {
     public static void data(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(event.includeClient(), new EnglishUS(packOutput));
+        generator.addProvider(event.includeClient(), new EnglishUnitedStatesOfAmerica(packOutput));
         generator.addProvider(event.includeClient(), new SimpleChinese(packOutput));
+        final var blocks = new BlockTagGeneration(event);
+        generator.addProvider(event.includeServer(), blocks);
+        generator.addProvider(event.includeServer(), new ItemTagGeneration(event, blocks));
     }
 }

@@ -1,12 +1,11 @@
 package io.github.nitianstudio.ding.geo;
 
+import io.github.nitianstudio.ding.Const;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.model.GeoModel;
 
-import static io.github.nitianstudio.ding.Ding.MODID;
-
-public class DefaultModel<T extends GeoAnimatable> extends GeoModel<T> {
+public class DefaultModel<T extends GeoAnimatable> extends GeoModel<T> implements Const {
     private final ResourceLocation model;
     private static final ResourceLocation emptyModel = ResourceLocation.fromNamespaceAndPath(MODID, "geo/empty.json");
     private static final ResourceLocation emptyTexture = ResourceLocation.fromNamespaceAndPath(MODID, "textures/empty.png");
@@ -44,4 +43,6 @@ public class DefaultModel<T extends GeoAnimatable> extends GeoModel<T> {
     public ResourceLocation getAnimationResource(T animatable) {
         return animation;
     }
+
+
 }

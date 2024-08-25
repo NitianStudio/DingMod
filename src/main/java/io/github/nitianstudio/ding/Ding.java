@@ -7,6 +7,7 @@ import io.github.nitianstudio.ding.event.DingModEvent;
 import io.github.nitianstudio.ding.registry.AllRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -23,13 +24,8 @@ import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Ding.MODID)
-public class Ding
+public class Ding implements Const
 {
-    // Define mod id in a common place for everything to reference
-    public static final String MODID = "ding";
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Items which will all be registered under the "ding" namespace
 
     public Ding(IEventBus modEventBus, ModContainer modContainer)
     {
