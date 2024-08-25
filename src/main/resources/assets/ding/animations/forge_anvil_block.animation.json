@@ -155,6 +155,7 @@
 			}
 		},
 		"running": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 0.4583,
 			"bones": {
 				"ingot": {
