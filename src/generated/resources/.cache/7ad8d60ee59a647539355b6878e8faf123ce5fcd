@@ -1,0 +1,16 @@
+// 1.21	2024-08-29T22:01:30.9485963	Tags for minecraft:item mod id ding
+e18c5e20c1738ddce65580a41b08b0b48ff5eca4 data/ding/tags/item/axe.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/ding/tags/item/body.json
+94972aeebbe778b9275a096ce28600608df67717 data/ding/tags/item/boot.json
+8a4832f87be4b287078debcdfe7c0cef86fed7a5 data/ding/tags/item/chest.json
+fdab8ddd5529ae14b26bc1853b004131135318a4 data/ding/tags/item/diamond.json
+8c4f379d97e2cd8c7f9297bf4fab7e60083ecb0d data/ding/tags/item/gem.json
+c3cd5e96baed61cad4743c18df0a0a270676d4e2 data/ding/tags/item/helmet.json
+dd713ad77f2588885ea36d84e20beaa4a538eabd data/ding/tags/item/hoe.json
+cba8947dcc0b6929b8a9a8c2959b41c0132f7912 data/ding/tags/item/ingot.json
+f2fbb268f066d9e6c26876d8ca9ae98a3dd27c85 data/ding/tags/item/legging.json
+dc49c327a26313dd90dcb055a745dcd5fb5d49e7 data/ding/tags/item/nugget.json
+fd9053434a5dca58babdb392bce006d894b0390e data/ding/tags/item/pickaxe.json
+de631933ee0a6591e89a9ea4afc8342452c9cec2 data/ding/tags/item/shovel.json
+d9fa8492b3cf95f697b9823051abd6f56771b81b data/ding/tags/item/star.json
+66171e114808bec22cc4ea1e2386834cbb4844e2 data/ding/tags/item/sword.json

@@ -1,11 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "io.github.nitianstudio.ding.mixin",
+  "package": "io.github.nitiaonstudio.ding.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "ding.refmap.json",
   "mixins": [
-    "AnimationControllerMixin"
   ],
   "client": [
   ],

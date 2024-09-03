@@ -1,0 +1,473 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"empty": {
+			"loop": true,
+			"bones": {
+				"ingot": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"gem": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"pickaxe": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"axe": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"hoe": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"sword": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"helmet": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"chestplate": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"leggings": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"boots": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"diamond": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"rest": {
+			"loop": true,
+			"bones": {
+				"ingot": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"diamond": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"gem": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"pickaxe": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"axe": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"hoe": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"sword": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"helmet": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"chestplate": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"leggings": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				},
+				"boots": {
+					"rotation": {
+						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+					},
+					"position": {
+						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+					}
+				}
+			}
+		},
+		"running": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.4583,
+			"bones": {
+				"ingot": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z"]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"diamond": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"gem": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"pickaxe": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"axe": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"hoe": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"sword": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"helmet": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"chestplate": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"leggings": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				},
+				"boots": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

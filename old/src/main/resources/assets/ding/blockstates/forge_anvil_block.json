@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ding:block/forge_anvil_block",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "ding:block/forge_anvil_block"
+    },
+    "facing=west": {
+      "model": "ding:block/forge_anvil_block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ding:block/forge_anvil_block",
+      "y": 180
+    }
+
+  }
+}
