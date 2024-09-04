@@ -7,7 +7,11 @@ import java.util.function.Consumer;
 public record RBI(
         int width,
         int height,
-        Consumer<BIMG> consumer
+        Consumer<BIMG> consumer,
+        int insertX,
+        int insertY,
+        boolean isBase,
+        boolean isGeneration
 ) {
 
 }

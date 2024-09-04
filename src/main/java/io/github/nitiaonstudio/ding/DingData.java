@@ -33,5 +33,6 @@ public class DingData {
         generator.addProvider(event.includeServer(), blocks);
         generator.addProvider(event.includeServer(), new ItemTagGeneration(packOutput, lookupProvider, existingFileHelper, blocks));
 
+
     }
 }

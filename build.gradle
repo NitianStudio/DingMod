@@ -104,6 +104,7 @@ neoForge {
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
     exclude '**/textures/generation'
+    exclude '.cache'
 }
 
 
