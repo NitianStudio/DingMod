@@ -9,7 +9,7 @@
 ## Animator
 - baka4n
 ## Mascot
-- MaodaoCatirD
+- Maodao_CatirD
 
 # 作者:
 
@@ -22,4 +22,4 @@
 ## 动画
 - baka4n
 ## 吉祥物
-- MaodaoCatirD
+- Maodao_CatirD
