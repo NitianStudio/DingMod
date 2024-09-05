@@ -1,11 +1,12 @@
-package io.github.nitiaonstudio.ding.data.resources;
+package io.github.nitiaonstudio.ding.data.ding.provider;
 
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingOutputStream;
 import io.github.nitiaonstudio.ding.Ding;
 import io.github.nitiaonstudio.ding.data.RBI;
-import io.github.nitiaonstudio.ding.data.XY;
-import io.github.nitiaonstudio.ding.data.XyWh;
+import io.github.nitiaonstudio.ding.data.resources.BIMG;
+import io.github.nitiaonstudio.ding.data.resources.RLSs;
+import io.github.nitiaonstudio.ding.data.resources.Utils;
 import lombok.Getter;
 import lombok.experimental.ExtensionMethod;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,13 +21,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -35,7 +33,7 @@ import java.util.concurrent.Executors;
 import static io.github.nitiaonstudio.ding.data.resources.RLSs.*;
 
 
-@ExtensionMethod({ Utils.class, RLSs.class })
+@ExtensionMethod({ Utils.class })
 public class TexturesProvider implements DataProvider {
 
     private final PackOutput output;
@@ -54,7 +52,8 @@ public class TexturesProvider implements DataProvider {
 
 
     public void apply() {
-        forge_anvil_block.addForgeAnvilBlockBaseGeneration(cmp, Map.of(
+        RLSs.setCmp(cmp);// init cmp to rls s
+        forge_anvil_block.addForgeAnvilBlockBaseGeneration(Map.of(
                 ResourceLocation.fromNamespaceAndPath(ResourceLocation.DEFAULT_NAMESPACE, "base"), new Color[]{
                         new Color(4, 4, 5, 255),
                         new Color(14, 12, 15, 255),
@@ -69,7 +68,7 @@ public class TexturesProvider implements DataProvider {
                         new Color(27, 25, 29, 255),
                 }));
 
-        ingot.addForgeAnvilBlockGeneration(cmp, Map.of(
+        ingot.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.IRON_INGOT), new Color[] {
                         new Color(197, 197, 197, 255),
                         new Color(136, 136, 136, 255),
@@ -93,7 +92,7 @@ public class TexturesProvider implements DataProvider {
                         new Color(219, 126, 73, 255),
                 }
         ));
-        lozenge.addForgeAnvilBlockGeneration(cmp, Map.of(
+        lozenge.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.DIAMOND), new Color[] {
                         new Color(20, 55, 105, 255),
                         new Color(49, 95, 161, 255),
@@ -105,7 +104,7 @@ public class TexturesProvider implements DataProvider {
                         new Color(234, 250, 255, 255),
                 }
         ));
-        gemstone.addForgeAnvilBlockGeneration(cmp, Map.of(
+        gemstone.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.EMERALD), new Color[]{
                         new Color(11, 38, 30, 255),
                         new Color(255, 255, 255, 255),
@@ -122,7 +121,7 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-        axe.addForgeAnvilBlockGeneration(cmp, Map.of(
+        axe.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.IRON_AXE), new Color[]{
                         new Color(66, 33, 30, 255),
                         new Color(136, 136, 136, 255),
@@ -135,7 +134,7 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-        pickaxe.addForgeAnvilBlockGeneration(cmp, Map.of(
+        pickaxe.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.IRON_PICKAXE), new Color[]{
                         new Color(66, 33, 30, 255),
                         new Color(136, 136, 136, 255),
@@ -149,7 +148,7 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-        sword.addForgeAnvilBlockGeneration(cmp, Map.of(
+        sword.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.IRON_SWORD), new Color[]{
                         new Color(82, 80, 86, 255),
                         new Color(197, 197, 197, 255),
@@ -163,7 +162,7 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-        hoe.addForgeAnvilBlockGeneration(cmp, Map.of(
+        hoe.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.IRON_HOE), new Color[]{
                         new Color(66, 33, 30, 255),
                         new Color(82, 80, 86, 255),
@@ -177,7 +176,7 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-        chestplate.addForgeAnvilBlockGeneration(cmp, Map.of(
+        chestplate.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.IRON_CHESTPLATE), new Color[]{
                         new Color(245, 245, 245, 255),
                         new Color(197, 197, 197, 255),
@@ -192,7 +191,7 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-        helmet.addForgeAnvilBlockGeneration(cmp, Map.of(
+        helmet.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.IRON_HELMET), new Color[]{
                         new Color(221, 221, 221, 255),
                         new Color(238, 238, 238, 255),
@@ -203,7 +202,37 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-        preGeneration("/assets/ding/textures/block/forge_anvil_block/minecraft/iron_leggings_get.png");
+        leggings.addForgeAnvilBlockGeneration(Map.of(
+                BuiltInRegistries.ITEM.getKey(Items.IRON_LEGGINGS), new Color[]{
+                        new Color(129, 133, 141, 255),
+                        new Color(165, 167, 173, 255),
+                        new Color(173, 178, 188, 255),
+                        new Color(245, 245, 245, 255),
+                        new Color(197, 197, 197, 255),
+                        new Color(160, 166, 176, 255),
+                        new Color(115, 120, 139, 255),
+                        new Color(64, 69, 86, 255),
+                        new Color(194, 197, 200, 255),
+                        new Color(91, 92, 108, 255),
+                }
+        ));
+
+        boots.addForgeAnvilBlockGeneration(Map.of(
+                BuiltInRegistries.ITEM.getKey(Items.IRON_BOOTS), new Color[]{
+                        new Color(58, 59, 69, 255),
+                        new Color(94, 98, 107, 255),
+                        new Color(129, 133, 141, 255),
+                        new Color(245, 245, 245, 255),
+                        new Color(160, 166, 176, 255),
+                        new Color(115, 120, 139, 255),
+                        new Color(64, 69, 86, 255),
+                        new Color(197, 197, 197, 255),
+                        new Color(194, 197, 200, 255),
+
+                }
+        ));
+
+//        "/assets/ding/textures/block/forge_anvil_block/minecraft/iron_boots_get.png".preGeneration();
 
         var tmp = new ConcurrentHashMap<>(cmp);
         var tmp1 = new ConcurrentHashMap<>(cmp);
@@ -278,91 +307,7 @@ public class TexturesProvider implements DataProvider {
 
     @Override
     public @NotNull String getName() {
-        return modid + "TexturesGeneration";
+        return "Textures Generation " + modid;
     }
 
-    @SuppressWarnings("unused")
-    @Deprecated(since = "Using in Date Generation")
-    public void preGeneration(String path) {
-        List<Color> list = new LinkedList<>();
-        Map<Color, List<XY>> cxy = new LinkedHashMap<>();
-        Map<Color, List<XyWh>> cXyWhs = new LinkedHashMap<>();
-        try(
-                BufferedWriter bw = Files.newBufferedWriter(Path.of(System.getProperty("user.dir"), "colors.txt"));
-                BufferedWriter bw1 = Files.newBufferedWriter(Path.of(System.getProperty("user.dir"), "code.txt"))
-        ) {
-            try {
-                BufferedImage read = ImageIO.read(Objects.requireNonNull(Ding.class.getResourceAsStream(path)));
-
-                int[][] data = new int[read.getWidth()][read.getHeight()];
-                for (int i = 0; i < read.getWidth(); i++) {
-                    for (int j = 0; j < read.getHeight(); j++) {
-                        data[i][j] = read.getRGB(i, j);
-                        var t = data[i][j];
-//                        if (t == 0) continue;
-                        Color color = new Color(((t & 0x00ff0000) >> 16), ((t & 0x0000ff00) >> 8), (t & 0x000000ff), ((t & 0xff000000) >>> 24));
-                        if (color.getAlpha() == 0) continue;
-                        List<XY> xys = cxy.getOrDefault(color, new LinkedList<>());
-                        xys.add(XY.builder().x(i).y(j).build());
-                        cxy.put(color, xys);
-                        if (!list.contains(color)) {
-                            list.add(color);
-                            bw.write("new Color(%d, %d, %d, %d),\n".formatted(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()));
-                        }
-
-                    }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            for (Map.Entry<Color, List<XY>> entry : cxy.entrySet()) {
-                Color color = entry.getKey();
-                List<XY> xys = entry.getValue();
-                List<Integer> sought = new LinkedList<>();
-                for (int i = 0; i < xys.size(); i++) {
-                    if (sought.contains(i)) continue;
-                    XY xy = xys.get(i);
-                    int x = xy.getX();
-                    int y = xy.getY();
-                    int j = 1, k = 1;
-                    boolean isX = true;
-                    boolean isY = true;
-                    while (isX) {
-                        XY tXY = XY.builder().x(x).y(y + j).build();
-                        if (!xys.contains(tXY)) {
-                            isX = false;
-                            continue;
-                        }
-                        sought.add(xys.indexOf(tXY));
-                        j++;
-                    }
-                    if (j == 1) {
-                        while (isY) {
-                            XY tXY = XY.builder().x(x + k).y(y).build();
-                            if (!xys.contains(tXY)) {
-                                isY = false;
-                                continue;
-                            }
-                            sought.add(xys.indexOf(tXY));
-                            k++;
-                        }
-                    }
-                    List<XyWh> listXyWh = cXyWhs.getOrDefault(color, new LinkedList<>());
-                    listXyWh.add(XyWh.builder().x(x).y(y).w(k).h(j).build());
-                    cXyWhs.put(color, listXyWh);
-                    sought.add(i);
-                }
-            }
-            for (Map.Entry<Color, List<XyWh>> entry : cXyWhs.entrySet()) {
-                Color color = entry.getKey();
-                bw1.write(".color(colors[%d])\n".formatted(list.indexOf(color)));
-                for (XyWh xyWh : entry.getValue()) {
-                    bw1.write(".rec(%d, %d, %d, %d)\n".formatted(xyWh.x, xyWh.y, xyWh.w, xyWh.h));
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 }
