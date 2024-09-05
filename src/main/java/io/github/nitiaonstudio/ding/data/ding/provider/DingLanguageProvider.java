@@ -4,7 +4,6 @@ import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingOutputStream;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import io.github.nitiaonstudio.ding.data.lang.Languages;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,11 +17,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -71,6 +67,7 @@ public final class DingLanguageProvider implements DataProvider {
         return CompletableFuture.allOf(futures);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     private CompletableFuture<?> save(CachedOutput output, Languages lang, ConcurrentHashMap<String, String> language) {
 
         return CompletableFuture.runAsync(() -> {
