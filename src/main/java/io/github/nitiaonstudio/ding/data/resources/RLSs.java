@@ -21,6 +21,7 @@ public enum RLSs {
     hoe(HoeBase::new),
     chestplate(ChestplateBase::new),
     helmet(HelmetBase::new),
+    leggings(LeggingsBase::new)
     ;
     private final Function<ConcurrentHashMap<ResourceLocation, RBI>, RLS> rls;
 

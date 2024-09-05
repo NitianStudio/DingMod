@@ -203,7 +203,7 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-//        preGeneration("/assets/ding/textures/block/forge_anvil_block/minecraft/iron_leggings_get.png");
+        preGeneration("/assets/ding/textures/block/forge_anvil_block/minecraft/iron_leggings_get.png");
 
         var tmp = new ConcurrentHashMap<>(cmp);
         var tmp1 = new ConcurrentHashMap<>(cmp);

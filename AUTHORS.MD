@@ -10,16 +10,3 @@
 - baka4n
 ## Mascot
 - Maodao_CatirD
-
-# 作者:
-
-## 团队
-- 逆天工作室
-## 代码
-- baka4n
-## 美术
-- Remnant_Leaf
-## 动画
-- baka4n
-## 吉祥物
-- Maodao_CatirD
