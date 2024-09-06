@@ -6,14 +6,17 @@ import io.github.nitiaonstudio.ding.data.RLS;
 import io.github.nitiaonstudio.ding.data.XY;
 import io.github.nitiaonstudio.ding.data.XyWh;
 import lombok.experimental.ExtensionMethod;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -25,6 +28,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
+
+import static java.awt.AlphaComposite.Clear;
 
 /**
  * 模板
@@ -62,6 +67,8 @@ public class Utils {
             rls.getRLS().factory(first.withPrefix(prefix.replace("${namespace}", first.getNamespace())).withSuffix(suffix), entry.getValue());
         }
     }
+
+
 
     public static void addForgeAnvilBlockGeneration(RLSs rls, Map<ResourceLocation, Color[]> locations) {
         add(rls, "generation/block/forge_anvil_block/${namespace}/", ".png", locations);
@@ -152,6 +159,50 @@ public class Utils {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public static ConcurrentHashMap<ResourceLocation, RBI> copyResources(
+            ConcurrentHashMap<ResourceLocation, RBI> cmp,
+            ConcurrentHashMap<ResourceLocation, BIMG> images,
+            int insertX,
+            int insertY,
+            boolean isBase,
+            boolean isGeneration,
+            Item... items
+    ) {
+        for (Item item : items) {
+            copyResources(cmp, images, item, insertX, insertY, isBase, isGeneration);
+        }
+        return cmp;
+    }
+
+    public static void copyResources(
+            ConcurrentHashMap<ResourceLocation, RBI> cmp,
+            ConcurrentHashMap<ResourceLocation, BIMG> images,
+            Item item,
+            int insertX,
+            int insertY,
+            boolean isBase,
+            boolean isGeneration
+    ) {
+        // String path
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item).withSuffix(".png");
+        try (InputStream resourceAsStream = Utils.class.getResourceAsStream("/assets/%s/textures/item/%s".formatted(key.getNamespace(), key.getPath()))) {
+            Objects.requireNonNull(resourceAsStream);
+            BufferedImage read = ImageIO.read(resourceAsStream);
+
+            addResources(cmp, key, read.getWidth(), read.getHeight(), img -> {
+                img
+                        .create()
+                        .composite(Clear)
+                        .create()
+                        .insertImage(read, 0, 0);
+            }, insertX, insertY, isBase, isGeneration);
+        } catch (IOException ignored) {
+
         }
 
     }

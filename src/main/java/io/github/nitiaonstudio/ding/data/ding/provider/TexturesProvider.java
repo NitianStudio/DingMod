@@ -31,6 +31,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static io.github.nitiaonstudio.ding.data.resources.RLSs.*;
+import static net.minecraft.world.item.Items.*;
 
 
 @ExtensionMethod({ Utils.class })
@@ -68,128 +69,26 @@ public class TexturesProvider implements DataProvider {
                         new Color(27, 25, 29, 255),
                 }));
 
-        ingot.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_INGOT), new Color[] {
-                        new Color(197, 197, 197, 255),
-                        new Color(136, 136, 136, 255),
-                        new Color(48, 49, 54, 255),
-                        new Color(154, 154, 154, 255),
-                        new Color(59, 60, 63, 255),
-                        new Color(161, 161, 161, 255),
-                        new Color(87, 87, 87, 255),
-                        new Color(28, 27, 32, 255),
-                        new Color(107, 104, 104, 255),
-                },
-                BuiltInRegistries.ITEM.getKey(Items.COPPER_INGOT), new Color[]{
-                        new Color(254, 248, 214, 255),
-                        new Color(237, 181, 94, 255),
-                        new Color(82, 27, 9, 255),
-                        new Color(255, 221, 129, 255),
-                        new Color(144, 59, 32, 255),
-                        new Color(255, 221, 129, 255),
-                        new Color(186, 102, 53, 255),
-                        new Color(28, 27, 32, 255),
-                        new Color(219, 126, 73, 255),
-                }
-        ));
-        lozenge.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.DIAMOND), new Color[] {
-                        new Color(20, 55, 105, 255),
-                        new Color(49, 95, 161, 255),
-                        new Color(161, 228, 250, 255),
-                        new Color(255, 255, 255, 255),
-                        new Color(198, 241, 255, 255),
-                        new Color(106, 167, 209, 255),
-                        new Color(225, 248, 255, 255),
-                        new Color(234, 250, 255, 255),
-                }
-        ));
-        gemstone.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.EMERALD), new Color[]{
-                        new Color(11, 38, 30, 255),
-                        new Color(255, 255, 255, 255),
-                        new Color(117, 186, 133, 255),
-                        new Color(171, 239, 187, 255),
-                        new Color(17, 50, 33, 255),
-                        new Color(222, 255, 230, 255),
-                        new Color(29, 85, 42, 255),
-                        new Color(88, 149, 115, 255),
-                        new Color(84, 156, 107, 255),
-                        new Color(38, 99, 53, 255),
-                        new Color(40, 38, 42, 255),
-                        new Color(27, 25, 29, 255),
-                }
-        ));
 
-        axe.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_AXE), new Color[]{
-                        new Color(66, 33, 30, 255),
-                        new Color(136, 136, 136, 255),
-                        new Color(107, 104, 104, 255),
-                        new Color(113, 67, 57, 255),
-                        new Color(136, 96, 67, 255),
-                        new Color(197, 197, 197, 255),
-                        new Color(167, 134, 109, 255),
-                        new Color(234, 234, 234, 255),
-                }
-        ));
 
-        pickaxe.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_PICKAXE), new Color[]{
-                        new Color(66, 33, 30, 255),
-                        new Color(136, 136, 136, 255),
-                        new Color(107, 104, 104, 255),
-                        new Color(87, 87, 87, 255),
-                        new Color(113, 67, 57, 255),
-                        new Color(154, 154, 154, 255),
-                        new Color(197, 197, 197, 255),
-                        new Color(136, 96, 67, 255),
-                        new Color(167, 134, 109, 255),
-                }
-        ));
+        cmp.copyResources(images,0, 32, false, true,
+                        IRON_INGOT, COPPER_INGOT, GOLD_INGOT, NETHERITE_INGOT)
+                .copyResources(images, 16, 32, false, true, DIAMOND)
+                .copyResources(images, 32, 32, false, true, EMERALD)
+                .copyResources(images, 48, 32, false, true,
+                        IRON_AXE, WOODEN_AXE, GOLDEN_AXE, NETHERITE_AXE, DIAMOND_AXE, STONE_AXE)
+                .copyResources(images, 64, 32, false, true,
+                        IRON_PICKAXE, WOODEN_PICKAXE, GOLDEN_PICKAXE, NETHERITE_PICKAXE, DIAMOND_PICKAXE, STONE_PICKAXE)
+                .copyResources(images, 48, 0, false, true,
+                        IRON_SWORD, WOODEN_SWORD, GOLDEN_SWORD, NETHERITE_SWORD, DIAMOND_SWORD, STONE_SWORD)
+                .copyResources(images, 48, 16, false, true,
+                        IRON_HOE, WOODEN_HOE, GOLDEN_HOE, NETHERITE_HOE, DIAMOND_HOE, STONE_HOE)
+                .copyResources(images, 64, 0, false, true,
+                        IRON_CHESTPLATE, GOLDEN_CHESTPLATE, NETHERITE_CHESTPLATE, DIAMOND_CHESTPLATE, CHAINMAIL_CHESTPLATE)
+        ;
 
-        sword.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_SWORD), new Color[]{
-                        new Color(82, 80, 86, 255),
-                        new Color(197, 197, 197, 255),
-                        new Color(136, 136, 136, 255),
-                        new Color(136, 96, 67, 255),
-                        new Color(163, 135, 112, 255),
-                        new Color(95, 54, 45, 255),
-                        new Color(107, 104, 104, 255),
-                        new Color(154, 154, 154, 255),
-                        new Color(113, 67, 57, 255),
-                }
-        ));
+//        "/assets/minecraft/textures/item/netherite_ingot.png".preGeneration();
 
-        hoe.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_HOE), new Color[]{
-                        new Color(66, 33, 30, 255),
-                        new Color(82, 80, 86, 255),
-                        new Color(107, 104, 104, 255),
-                        new Color(136, 136, 136, 255),
-                        new Color(113, 67, 57, 255),
-                        new Color(154, 154, 154, 255),
-                        new Color(197, 197, 197, 255),
-                        new Color(136, 96, 67, 255),
-                        new Color(167, 134, 109, 255),
-                }
-        ));
-
-        chestplate.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_CHESTPLATE), new Color[]{
-                        new Color(245, 245, 245, 255),
-                        new Color(197, 197, 197, 255),
-                        new Color(91, 92, 108, 255),
-                        new Color(165, 167, 173, 255),
-                        new Color(194, 197, 200, 255),
-                        new Color(221, 221, 221, 255),
-                        new Color(160, 166, 176, 255),
-                        new Color(115, 120, 139, 255),
-                        new Color(64, 69, 86, 255),
-                        new Color(124, 128, 137, 255),
-                }
-        ));
 
         helmet.addForgeAnvilBlockGeneration(Map.of(
                 BuiltInRegistries.ITEM.getKey(Items.IRON_HELMET), new Color[]{
@@ -232,7 +131,7 @@ public class TexturesProvider implements DataProvider {
                 }
         ));
 
-//        "/assets/ding/textures/block/forge_anvil_block/minecraft/iron_boots_get.png".preGeneration();
+
 
         var tmp = new ConcurrentHashMap<>(cmp);
         var tmp1 = new ConcurrentHashMap<>(cmp);
@@ -243,7 +142,7 @@ public class TexturesProvider implements DataProvider {
             String s = split[split.length - 1];
             RBI rbi = entry.getValue();
             if (rbi.isBase() && rbi.isGeneration()) {
-                cmp.add(modid, "block/forge_anvil_block/%s".formatted(s), 128, 128, img -> {
+                cmp.add(modid, "block/forge_anvil_block/%s".formatted(s), 256, 256, img -> {
                     img.sameCode(cmp, images, resourceLocation)
                             .close();
                 }, 0, 0, false, false);
@@ -252,7 +151,7 @@ public class TexturesProvider implements DataProvider {
                     RBI rbi1 = e.getValue();
                     if (rbi1.isGeneration() && !rbi1.isBase()) {
                         String[] split1 = location.getPath().split("/");
-                        cmp.add(modid, "block/forge_anvil_block/%s/%s_%s".formatted(resourceLocation.getNamespace(), s.replace(".png", ""), split1[split1.length - 1]), 128, 128, img -> {
+                        cmp.add(modid, "block/forge_anvil_block/%s/%s_%s".formatted(resourceLocation.getNamespace(), s.replace(".png", ""), split1[split1.length - 1]), 256, 256, img -> {
                             img
                                     .sameCode(cmp, getImages(), resourceLocation)
                                     .sameCode(cmp, getImages(), location)
