@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.util.jar.JarFile
+
 plugins {
     id 'java-library'
     id 'eclipse'
@@ -104,6 +107,7 @@ neoForge {
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
     exclude '**/textures/generation'
+
 //    exclude '**/minecraft/textures'
     exclude '.cache'
 }
@@ -126,6 +130,7 @@ jar {
     from(project.file("LICENSE"))
     from(project.file("AUTHORS.MD"))
     from(project.file("README.md"))
+    exclude 'assets/minecraft'
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -173,5 +178,42 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+    }
+}
+
+List<String> keys = ["item"]
+boolean isCompulsion = false
+
+tasks.register("copyResources") {
+    def jarFile = layout.buildDirectory.dir("moddev").get().dir("artifacts").file("neoforge-${neo_version}-minecraft-resources-aka-client-extra.jar")
+    def mcAssets = layout.projectDirectory.dir("src").dir("main").dir("resources").dir("assets").dir("minecraft").getAsFile().toPath()
+    if (Files.notExists(mcAssets) || isCompulsion) {
+        JarFile jf = new JarFile(jarFile.asFile)
+        def entries = jf.entries()
+        while (entries.hasMoreElements()) {
+            def entry = entries.nextElement()
+            if (entry.name.startsWith("assets/minecraft/textures/")) {
+                for (final def key in keys ) {
+                    def newName = entry.name.replace("assets/minecraft/textures/", "")
+                    if(newName.startsWith("${key}/")) {
+                        newName = newName.replace("${key}/", "")
+
+
+                        def parent = mcAssets.resolve("textures").resolve(key)
+                        Files.createDirectories(parent)
+                        def stream = jf.getInputStream(entry)
+                        def writer =Files.newOutputStream(parent.resolve(newName))
+                        byte[] buffer = new byte[1024]
+                        int len
+                        while ((len = stream.read(buffer)) > -1) {
+                            writer.write(buffer, 0, len)
+                        }
+                        writer.flush()
+                        writer.close()
+                        stream.close()
+                    }
+                }
+            }
+        }
     }
 }

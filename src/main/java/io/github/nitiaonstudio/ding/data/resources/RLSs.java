@@ -15,11 +15,6 @@ import java.util.function.Function;
 @Getter
 public enum RLSs {
     forge_anvil_block(ForgeAnvilBase::new),
-    sword(SwordBase::new),
-    gemstone(GemstoneBase::new),
-    axe(AxeBase::new),
-    pickaxe(PickaxeBase::new),
-    hoe(HoeBase::new),
     chestplate(ChestplateBase::new),
     helmet(HelmetBase::new),
     leggings(LeggingsBase::new),

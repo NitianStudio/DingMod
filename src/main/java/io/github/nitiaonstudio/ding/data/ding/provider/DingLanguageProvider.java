@@ -5,8 +5,10 @@ import com.google.common.hash.HashingOutputStream;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.github.nitiaonstudio.ding.data.lang.Languages;
+import io.github.nitiaonstudio.ding.data.resources.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.ExtensionMethod;
 import lombok.val;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -25,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @SuppressWarnings("UnusedReturnValue")
 @Getter
 @Setter
-
+@ExtensionMethod({Utils.class})
 public final class DingLanguageProvider implements DataProvider {
     public static final Gson gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
     public final ConcurrentHashMap<Languages, ConcurrentHashMap<String, String>> languages = new ConcurrentHashMap<>();
@@ -76,16 +78,7 @@ public final class DingLanguageProvider implements DataProvider {
                     .resolve(modid)
                     .resolve("lang")
                     .resolve(lang.name() + ".json");
-            String json = gson.toJson(language);
-            byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
-            try(val out = new ByteArrayOutputStream();
-                val hash = new HashingOutputStream(Hashing.sha256(), out)
-            ) {
-                hash.write(bytes);
-                output.writeIfNeeded(target, bytes, hash.hash());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            output.saveJsonToPath(language, target, gson);
 
         });
     }

@@ -68,69 +68,32 @@ public class TexturesProvider implements DataProvider {
                         new Color(55, 53, 58, 255),
                         new Color(27, 25, 29, 255),
                 }));
-
+        
 
 
         cmp.copyResources(images,0, 32, false, true,
-                        IRON_INGOT, COPPER_INGOT, GOLD_INGOT, NETHERITE_INGOT)
-                .copyResources(images, 16, 32, false, true, DIAMOND)
-                .copyResources(images, 32, 32, false, true, EMERALD)
-                .copyResources(images, 48, 32, false, true,
-                        IRON_AXE, WOODEN_AXE, GOLDEN_AXE, NETHERITE_AXE, DIAMOND_AXE, STONE_AXE)
-                .copyResources(images, 64, 32, false, true,
-                        IRON_PICKAXE, WOODEN_PICKAXE, GOLDEN_PICKAXE, NETHERITE_PICKAXE, DIAMOND_PICKAXE, STONE_PICKAXE)
-                .copyResources(images, 48, 0, false, true,
-                        IRON_SWORD, WOODEN_SWORD, GOLDEN_SWORD, NETHERITE_SWORD, DIAMOND_SWORD, STONE_SWORD)
-                .copyResources(images, 48, 16, false, true,
-                        IRON_HOE, WOODEN_HOE, GOLDEN_HOE, NETHERITE_HOE, DIAMOND_HOE, STONE_HOE)
-                .copyResources(images, 64, 0, false, true,
-                        IRON_CHESTPLATE, GOLDEN_CHESTPLATE, NETHERITE_CHESTPLATE, DIAMOND_CHESTPLATE, CHAINMAIL_CHESTPLATE)
-        ;
+                        IRON_INGOT, COPPER_INGOT, GOLD_INGOT, NETHERITE_INGOT);
+        cmp.copyResources(images, 16, 32, false, true, DIAMOND);
+        cmp.copyResources(images, 32, 32, false, true, EMERALD);
+        cmp.copyResources(images, 48, 32, false, true,
+                        IRON_AXE, WOODEN_AXE, GOLDEN_AXE, NETHERITE_AXE, DIAMOND_AXE, STONE_AXE);
+        cmp.copyResources(images, 64, 32, false, true,
+                        IRON_PICKAXE, WOODEN_PICKAXE, GOLDEN_PICKAXE, NETHERITE_PICKAXE, DIAMOND_PICKAXE, STONE_PICKAXE);
+        cmp.copyResources(images, 48, 0, false, true,
+                        IRON_SWORD, WOODEN_SWORD, GOLDEN_SWORD, NETHERITE_SWORD, DIAMOND_SWORD, STONE_SWORD);
+        cmp.copyResources(images, 48, 16, false, true,
+                        IRON_HOE, WOODEN_HOE, GOLDEN_HOE, NETHERITE_HOE, DIAMOND_HOE, STONE_HOE);
+        cmp.copyResources(images, 64, 0, false, true,
+                        IRON_CHESTPLATE, GOLDEN_CHESTPLATE, NETHERITE_CHESTPLATE, DIAMOND_CHESTPLATE, CHAINMAIL_CHESTPLATE);
+        cmp.copyResources(images, 64, 16, false, true,
+                        IRON_HELMET, GOLDEN_HELMET, NETHERITE_HELMET, DIAMOND_HELMET, CHAINMAIL_HELMET);
+        cmp.copyResources(images, 80, 0, false, true,
+                        IRON_LEGGINGS, GOLDEN_LEGGINGS, NETHERITE_LEGGINGS, DIAMOND_LEGGINGS, CHAINMAIL_LEGGINGS);
+        cmp.copyResources(images, 80, 16, false, true,
+                        IRON_BOOTS, GOLDEN_BOOTS, NETHERITE_BOOTS, DIAMOND_BOOTS, CHAINMAIL_BOOTS);
+
 
 //        "/assets/minecraft/textures/item/netherite_ingot.png".preGeneration();
-
-
-        helmet.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_HELMET), new Color[]{
-                        new Color(221, 221, 221, 255),
-                        new Color(238, 238, 238, 255),
-                        new Color(64, 69, 86, 255),
-                        new Color(115, 120, 139, 255),
-                        new Color(160, 166, 176, 255),
-                        new Color(197, 197, 197, 255),
-                }
-        ));
-
-        leggings.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_LEGGINGS), new Color[]{
-                        new Color(129, 133, 141, 255),
-                        new Color(165, 167, 173, 255),
-                        new Color(173, 178, 188, 255),
-                        new Color(245, 245, 245, 255),
-                        new Color(197, 197, 197, 255),
-                        new Color(160, 166, 176, 255),
-                        new Color(115, 120, 139, 255),
-                        new Color(64, 69, 86, 255),
-                        new Color(194, 197, 200, 255),
-                        new Color(91, 92, 108, 255),
-                }
-        ));
-
-        boots.addForgeAnvilBlockGeneration(Map.of(
-                BuiltInRegistries.ITEM.getKey(Items.IRON_BOOTS), new Color[]{
-                        new Color(58, 59, 69, 255),
-                        new Color(94, 98, 107, 255),
-                        new Color(129, 133, 141, 255),
-                        new Color(245, 245, 245, 255),
-                        new Color(160, 166, 176, 255),
-                        new Color(115, 120, 139, 255),
-                        new Color(64, 69, 86, 255),
-                        new Color(197, 197, 197, 255),
-                        new Color(194, 197, 200, 255),
-
-                }
-        ));
-
 
 
         var tmp = new ConcurrentHashMap<>(cmp);

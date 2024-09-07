@@ -1,12 +1,17 @@
 package io.github.nitiaonstudio.ding.data.resources;
 
+import com.google.common.hash.Hashing;
+import com.google.common.hash.HashingOutputStream;
+import com.google.gson.Gson;
 import io.github.nitiaonstudio.ding.Ding;
 import io.github.nitiaonstudio.ding.data.RBI;
 import io.github.nitiaonstudio.ding.data.RLS;
 import io.github.nitiaonstudio.ding.data.XY;
 import io.github.nitiaonstudio.ding.data.XyWh;
 import lombok.experimental.ExtensionMethod;
+import lombok.val;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -15,8 +20,10 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -65,6 +72,19 @@ public class Utils {
         for (Map.Entry<ResourceLocation, Color[]> entry : locations.entrySet()) {
             ResourceLocation first = entry.getKey();
             rls.getRLS().factory(first.withPrefix(prefix.replace("${namespace}", first.getNamespace())).withSuffix(suffix), entry.getValue());
+        }
+    }
+
+    public static void saveJsonToPath(CachedOutput output, Object value, Path target, Gson gson) {
+        String json = gson.toJson(value);
+        byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
+        try(val out = new ByteArrayOutputStream();
+            val hash = new HashingOutputStream(Hashing.sha256(), out)
+        ) {
+            hash.write(bytes);
+            output.writeIfNeeded(target, bytes, hash.hash());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

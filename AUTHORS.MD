@@ -6,6 +6,7 @@
 - baka4n
 ## Artist
 - Remnant_Leaf
+- baka4n
 ## Animator
 - baka4n
 ## Mascot

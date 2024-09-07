@@ -1,6 +1,7 @@
 package io.github.nitiaonstudio.ding;
 
 import io.github.nitiaonstudio.ding.data.ding.provider.DingLanguageProvider;
+import io.github.nitiaonstudio.ding.data.ding.provider.ModelProvider;
 import io.github.nitiaonstudio.ding.data.lang.Languages;
 import io.github.nitiaonstudio.ding.data.ding.provider.TexturesProvider;
 import io.github.nitiaonstudio.ding.data.tag.BlockTagGeneration;
@@ -35,6 +36,8 @@ public class DingData {
 
                 .languageSelect(Languages.zh_cn)
                 .add(BlockRegistry.forge_anvil_block.get(), "锻造砧"));
+        generator.addProvider(event.includeClient(), new ModelProvider(packOutput, MODID)
+                .addGeckolibBlockModel(BlockRegistry.forge_anvil_block.get(), 256, 256));
 //        generator.addProvider(event.includeClient(), new EnglishUnitedStatesOfAmerica(packOutput));
 //        generator.addProvider(event.includeClient(), new SimpleChinese(packOutput));
         final var blocks = new BlockTagGeneration(packOutput, lookupProvider, existingFileHelper);
