@@ -425,6 +425,34 @@
 							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
 						}
 					}
+				},
+				"star": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "forge.anvil.block.rotate.y", 0]
+						},
+						"0.2917": {
+							"vector": [
+								"(forge.anvil.block.move.to.x - forge.anvil.block.move.x) >= 0 ? 5 : -5",
+								"(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75",
+								"(forge.anvil.block.move.to.z - forge.anvil.block.move.z) >= 0 ? 5 : -5"
+							]
+						},
+						"0.4583": {
+							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+						},
+						"0.2917": {
+							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						},
+						"0.4583": {
+							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						}
+					}
 				}
 			}
 		}

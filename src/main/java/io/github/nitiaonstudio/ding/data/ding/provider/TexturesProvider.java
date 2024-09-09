@@ -93,6 +93,9 @@ public class TexturesProvider implements DataProvider {
                         IRON_BOOTS, GOLDEN_BOOTS, NETHERITE_BOOTS, DIAMOND_BOOTS, CHAINMAIL_BOOTS);
         cmp.copyResources(images, 80, 32, false, true,
                         IRON_NUGGET, GOLD_NUGGET);
+        cmp.copyResources(images, 96, 0, false, true,
+                        NETHER_STAR);
+
 
 
 
