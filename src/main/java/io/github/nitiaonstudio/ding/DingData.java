@@ -1,5 +1,7 @@
 package io.github.nitiaonstudio.ding;
 
+import io.github.nitiaonstudio.ding.data.blockstate.BlockStateGson;
+import io.github.nitiaonstudio.ding.data.ding.provider.BlockStatesProvider;
 import io.github.nitiaonstudio.ding.data.ding.provider.DingLanguageProvider;
 import io.github.nitiaonstudio.ding.data.ding.provider.ModelProvider;
 import io.github.nitiaonstudio.ding.data.lang.Languages;
@@ -38,6 +40,13 @@ public class DingData {
                 .add(BlockRegistry.forge_anvil_block.get(), "锻造砧"));
         generator.addProvider(event.includeClient(), new ModelProvider(packOutput, MODID)
                 .addGeckolibBlockModel(BlockRegistry.forge_anvil_block.get(), 256, 256));
+        BlockStateGson.Variant variant = new BlockStateGson.Variant().setModel(Ding.id("block/forge_anvil_block"));
+        generator.addProvider(event.includeClient(), new BlockStatesProvider(packOutput, MODID)
+                .addBlockStates(BlockRegistry.forge_anvil_block.get(), new BlockStateGson()
+                        .add("facing=east", variant.copy().setY(270))
+                        .add("facing=south", variant.copy())
+                        .add("facing=west", variant.copy().setY(90))
+                        .add("facing=north", variant.copy().setY(180))));
 //        generator.addProvider(event.includeClient(), new EnglishUnitedStatesOfAmerica(packOutput));
 //        generator.addProvider(event.includeClient(), new SimpleChinese(packOutput));
         final var blocks = new BlockTagGeneration(packOutput, lookupProvider, existingFileHelper);
