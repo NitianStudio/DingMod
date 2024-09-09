@@ -91,6 +91,9 @@ public class TexturesProvider implements DataProvider {
                         IRON_LEGGINGS, GOLDEN_LEGGINGS, NETHERITE_LEGGINGS, DIAMOND_LEGGINGS, CHAINMAIL_LEGGINGS);
         cmp.copyResources(images, 80, 16, false, true,
                         IRON_BOOTS, GOLDEN_BOOTS, NETHERITE_BOOTS, DIAMOND_BOOTS, CHAINMAIL_BOOTS);
+        cmp.copyResources(images, 80, 32, false, true,
+                        IRON_NUGGET, GOLD_NUGGET);
+
 
 
 //        "/assets/minecraft/textures/item/netherite_ingot.png".preGeneration();

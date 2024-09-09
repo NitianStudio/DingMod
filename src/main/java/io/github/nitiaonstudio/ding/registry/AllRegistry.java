@@ -15,6 +15,7 @@ public class AllRegistry {
 
     public static void registerAll(IEventBus modEventBus) {
         BlockRegistry.registry();
+        SoundRegistry.registry();
         sounds.register(modEventBus);
         blocks.register(modEventBus);
         blockEntities.register(modEventBus);

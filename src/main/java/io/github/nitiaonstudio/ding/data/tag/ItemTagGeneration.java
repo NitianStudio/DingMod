@@ -6,11 +6,14 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 import static io.github.nitiaonstudio.ding.Ding.MODID;
 
@@ -21,8 +24,14 @@ public class ItemTagGeneration extends ItemTagsProvider {
         super(output, lookupProvider, btg.contentsGetter(), MODID, existingFileHelper);
     }
 
+    public IntrinsicTagAppender<Item> tag(Supplier<TagKey<Item>> supplier) {
+        return tag(supplier.get());
+    }
+
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
+
+        IntrinsicTagAppender<Item> ding = tag(TagRegistry.Items.ding.get());
         IntrinsicTagAppender<Item> ingot = tag(TagRegistry.Items.ingot.get());
         IntrinsicTagAppender<Item> diamond = tag(TagRegistry.Items.diamond.get());
         IntrinsicTagAppender<Item> gem = tag(TagRegistry.Items.gem.get());
@@ -38,6 +47,7 @@ public class ItemTagGeneration extends ItemTagsProvider {
         IntrinsicTagAppender<Item> body = tag(TagRegistry.Items.body.get());
         IntrinsicTagAppender<Item> nugget = tag(TagRegistry.Items.nugget.get());
         IntrinsicTagAppender<Item> star = tag(TagRegistry.Items.star.get());
+
         ingot.add(
                 Items.IRON_INGOT,
                 Items.COPPER_INGOT,
@@ -75,38 +85,7 @@ public class ItemTagGeneration extends ItemTagsProvider {
                 Items.DIAMOND_BOOTS,
                 Items.NETHERITE_BOOTS
         );
-//        body.add()
 
-//        add(chest, ArmorItem.class, (appender, armorItem) -> {
-//            if(armorItem.getType().equals(ArmorItem.Type.CHESTPLATE)) {
-//                appender.add(armorItem);
-//            }
-//            return appender;
-//        });
-//        add(helmet, ArmorItem.class, (appender, armorItem) -> {
-//            if(armorItem.getType().equals(ArmorItem.Type.HELMET)) {
-//                appender.add(armorItem);
-//            }
-//            return appender;
-//        });
-//        add(legging, ArmorItem.class, (appender, armorItem) -> {
-//            if(armorItem.getType().equals(ArmorItem.Type.LEGGINGS)) {
-//                appender.add(armorItem);
-//            }
-//            return appender;
-//        });
-//        add(boot, ArmorItem.class, (appender, armorItem) -> {
-//            if(armorItem.getType().equals(ArmorItem.Type.BOOTS)) {
-//                appender.add(armorItem);
-//            }
-//            return appender;
-//        });
-//        add(body, ArmorItem.class, (appender, armorItem) -> {
-//            if(armorItem.getType().equals(ArmorItem.Type.BODY)) {
-//                appender.add(armorItem);
-//            }
-//            return appender;
-//        });
         nugget.add(Items.IRON_NUGGET, Items.GOLD_NUGGET);
         star.add(Items.NETHER_STAR);
 

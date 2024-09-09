@@ -1,7 +1,5 @@
 package io.github.nitiaonstudio.ding.data.ding.provider;
 
-import com.google.common.hash.Hashing;
-import com.google.common.hash.HashingOutputStream;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.github.nitiaonstudio.ding.data.lang.Languages;
@@ -10,19 +8,20 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.ExtensionMethod;
 import lombok.val;
+import net.minecraft.core.Holder;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 @SuppressWarnings("UnusedReturnValue")
 @Getter
@@ -47,15 +46,25 @@ public final class DingLanguageProvider implements DataProvider {
         return this;
     }
 
-    public DingLanguageProvider add(Item item, String translate) {
-        targetSelect.put(item.getDescriptionId(), translate);
+    public <R> DingLanguageProvider add(Supplier<R> holder, String translate) {
+        R value = holder.get();
+        return switch (value) {
+            case SoundEvent sound -> add( "sound.${namespace}.${path}", sound.getLocation(), translate);
+            case Item item -> add(item.getDescriptionId(), translate);
+            case Block block -> add(block.getDescriptionId(), translate);
+            default -> this;
+        };
+    }
+
+    public DingLanguageProvider add(String key, String translate) {
+        targetSelect.put(key, translate);
         return this;
     }
 
-    public DingLanguageProvider add(Block block, String translate) {
-        targetSelect.put(block.getDescriptionId(), translate);
-        return this;
+    public DingLanguageProvider add(String format, ResourceLocation key, String translate) {
+        return add(format.replace("${namespace}", key.getNamespace()).replace("${path}",key.getPath()), translate);
     }
+
 
     @Override
     public @NotNull CompletableFuture<?> run(@NotNull CachedOutput output) {

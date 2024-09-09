@@ -1,0 +1,11 @@
+{
+  "ding": {
+    "sounds": [
+      {
+        "attenuation_distance": 5,
+        "name": "ding:ding"
+      }
+    ],
+    "subtitle": "sound.ding.ding"
+  }
+}
