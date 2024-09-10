@@ -1,6 +1,7 @@
 package io.github.nitiaonstudio.ding;
 
 import com.mojang.logging.LogUtils;
+import io.github.nitiaonstudio.ding.event.PlayerEvents;
 import io.github.nitiaonstudio.ding.registry.AllRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -58,6 +59,7 @@ public class Ding {
         // Note that this is necessary if and only if we want *this* class (Ding) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(new PlayerEvents());
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

@@ -43,5 +43,7 @@ public class DingClient {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockRegistry.BlockEntityRegistry.forge_anvil_block.get(), context -> Renders.forge_anvil_block_renderer);
+
+
     }
 }

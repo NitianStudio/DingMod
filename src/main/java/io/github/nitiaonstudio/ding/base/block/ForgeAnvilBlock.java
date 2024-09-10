@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -39,8 +40,23 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
     public static final MapCodec<FallingBlock> CODEC = simpleCodec(ForgeAnvilBlock::new);
     private static final int FALL_DAMAGE_MAX = 40;
     public ForgeAnvilBlock(Properties properties) {
-        super(properties.noOcclusion());
+        super(properties.noOcclusion().strength(10f, 3000f));
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    public void destroy(LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockState state) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof ForgeAnvilTileEntity forgeAnvilTile  && level instanceof Level l) {
+            ItemStack stack = forgeAnvilTile.getStack();
+            if (!stack.isEmpty()) {
+                level.addFreshEntity(new ItemEntity(
+                        l, pos.getX(), pos.getY(), pos.getZ(),
+                        stack
+                ));
+            }
+        }
+        super.destroy(level, pos, state);
     }
 
     @Override

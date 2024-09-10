@@ -4,12 +4,10 @@ package io.github.nitiaonstudio.ding.registry;
 import com.mojang.datafixers.DSL;
 import io.github.nitiaonstudio.ding.base.block.ForgeAnvilBlock;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
 
 import static io.github.nitiaonstudio.ding.registry.AllRegistry.*;
 
@@ -22,7 +20,6 @@ public class BlockRegistry {
     }
 
     public static class ItemRegistry {
-        public static final DeferredItem<BlockItem> forge_anvil_block = items.registerSimpleBlockItem(BlockRegistry.forge_anvil_block);
         public static void registry() {
         }
     }

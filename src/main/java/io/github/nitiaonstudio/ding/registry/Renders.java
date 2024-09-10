@@ -1,15 +1,12 @@
 package io.github.nitiaonstudio.ding.registry;
 
 import io.github.nitiaonstudio.ding.Ding;
-import io.github.nitiaonstudio.ding.base.property.object.Modes;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.cache.GeckoLibCache;
 import software.bernie.geckolib.loading.math.MathParser;
-import software.bernie.geckolib.loading.math.value.Variable;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 

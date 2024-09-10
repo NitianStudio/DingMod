@@ -48,8 +48,8 @@ public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity>
     private int cd;//当cd为0的时候可以再次锻打
     private double rotateY, moveX, moveZ;
     private double toRotateY, toMoveX, toMoveZ;
-    private Modes MODE;
-    private Raws animationName;
+    private Modes MODE = Modes.BASE;
+    private Raws animationName = rest;
 
     public ForgeAnvilTileEntity(BlockPos pos, BlockState blockState) {
         super(BlockRegistry.BlockEntityRegistry.forge_anvil_block.get(), pos, blockState);
@@ -71,9 +71,10 @@ public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity>
         toMoveX = tag.getDouble("to_move_x");
         moveZ = tag.getDouble("move_z");
         toMoveZ = tag.getDouble("to_move_z");
-        MODE = Modes.valueOf(tag.getString("mode"));
+        String mode = tag.getString("mode");
+        MODE = mode.isEmpty() ? Modes.BASE : Modes.valueOf(mode);
         String animation_name = tag.getString("animation_name");
-        animationName = Raws.valueOf(animation_name.isEmpty() ? "rest": animation_name);
+        animationName = animation_name.isEmpty() ? rest : Raws.valueOf(animation_name);
     }
 
 
