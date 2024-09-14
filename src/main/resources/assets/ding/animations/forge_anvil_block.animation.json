@@ -2,411 +2,320 @@
 	"format_version": "1.8.0",
 	"animations": {
 		"rest": {
-			"loop": true,
-			"bones": {
-				"ingot": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"diamond": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"gem": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"pickaxe": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"axe": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"hoe": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"sword": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"helmet": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"chestplate": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"leggings": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				},
-				"boots": {
-					"rotation": {
-						"vector": [0, "forge.anvil.block.rotate.to.y", 0]
-					},
-					"position": {
-						"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
-					}
-				}
-			}
+			"loop": true
 		},
 		"running": {
-			"loop": "hold_on_last_frame",
-			"animation_length": 0.4583,
+			"animation_length": 0.5,
 			"bones": {
 				"ingot": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z"]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"diamond": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"gem": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"pickaxe": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"axe": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"hoe": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"sword": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"helmet": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"chestplate": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"leggings": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"boots": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"nugget": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z"]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
 				"star": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, "forge.anvil.block.rotate.y", 0]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["math.random_integer(-10, 10)", "(forge.anvil.block.rotate.to.y - forge.anvil.block.rotate.y) * 0.75", "math.random_integer(-10, 10)"]
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
 						},
-						"0.4583": {
-							"vector": [0, "forge.anvil.block.rotate.to.y", 0]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["forge.anvil.block.move.x", 0, "forge.anvil.block.move.z "]
+							"vector": [0, 0, 0]
 						},
-						"0.2917": {
-							"vector": ["(forge.anvil.block.move.to.x - forge.anvil.block.move.x) * 0.75", 0.6, "(forge.anvil.block.move.to.z - forge.anvil.block.move.z) * 0.75"]
+						"0.25": {
+							"vector": [0, 0.6, 0]
 						},
-						"0.4583": {
-							"vector": ["forge.anvil.block.move.to.x", 0, "forge.anvil.block.move.to.z"]
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				}

@@ -49,19 +49,5 @@ public class Renders {
             return Ding.id("animations/forge_anvil_block.animation.json");
         }
 
-        @Override
-        public void applyMolangQueries(AnimationState<ForgeAnvilTileEntity> animationState, double animTime) {
-            ForgeAnvilTileEntity entity = animationState.getAnimatable();
-            MathParser.setVariable(forgeAnvilBlockRotateY, entity::getRotateY);
-            MathParser.setVariable(forgeAnvilBlockRotateToY, entity::getToRotateY);
-            MathParser.setVariable(forgeAnvilBlockMoveX, entity::getMoveX);
-            MathParser.setVariable(forgeAnvilBlockMoveToX, entity::getToMoveX);
-            MathParser.setVariable(forgeAnvilBlockMoveZ, entity::getMoveZ);
-            MathParser.setVariable(forgeAnvilBlockMoveToZ, entity::getToMoveZ);
-            super.applyMolangQueries(animationState, animTime);
-
-        }
-
-
     });
 }

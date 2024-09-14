@@ -1,6 +1,6 @@
 package io.github.nitiaonstudio.ding.base.tile;
 
-import io.github.nitiaonstudio.ding.base.geo.DefaultBlockTile;
+import io.github.nitiaonstudio.ding.Ding;
 import io.github.nitiaonstudio.ding.base.property.object.Modes;
 import io.github.nitiaonstudio.ding.registry.BlockRegistry;
 import lombok.Getter;
@@ -13,15 +13,17 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.animation.keyframe.event.ParticleKeyframeEvent;
 import software.bernie.geckolib.animation.keyframe.event.SoundKeyframeEvent;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 import static io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity.Raws.rest;
@@ -30,19 +32,7 @@ import static software.bernie.geckolib.animation.RawAnimation.begin;
 
 @Getter
 @Setter
-public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity> {
-
-
-    public enum Raws implements Supplier<String> {
-        rest,
-        running;
-
-        @Override
-        public String get() {
-            return name();
-        }
-    }
-
+public class ForgeAnvilTileEntity extends BlockEntity implements GeoBlockEntity {
 
     private ItemStack stack = ItemStack.EMPTY;
     private double rotateY, moveX, moveZ;
@@ -51,11 +41,24 @@ public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity>
     private boolean hold = false;
 
     public ForgeAnvilTileEntity(BlockPos pos, BlockState blockState) {
-        super(BlockRegistry.BlockEntityRegistry.forge_anvil_block.get(), pos, blockState, controller -> {
-            controller.triggerableAnim("run", begin().thenPlay(running.get()));
-        });
-        SingletonGeoAnimatable.registerSyncedAnimatable(this);
+        super(BlockRegistry.BlockEntityRegistry.forge_anvil_block.get(), pos, blockState);
 
+    }
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "ForgeAnvilBlock",0,  this::state)
+                .setParticleKeyframeHandler(this::particleKeyframeHandler)
+                .setSoundKeyframeHandler(this::soundKeyFrameHandler)
+                .triggerableAnim("run", begin().thenPlay(running.get()))
+        );
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 
     @Override
@@ -109,27 +112,29 @@ public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity>
         tag.putString("mode",MODE.name());
     }
 
-    @Override
-    protected void soundKeyFrameHandler(SoundKeyframeEvent<DefaultBlockTile<ForgeAnvilTileEntity>> event) {
 
-        super.soundKeyFrameHandler(event);
-    }
-
-    @Override
-    public void particleKeyframeHandler(ParticleKeyframeEvent<DefaultBlockTile<ForgeAnvilTileEntity>> event) {
-        super.particleKeyframeHandler(event);
+    protected void soundKeyFrameHandler(SoundKeyframeEvent<ForgeAnvilTileEntity> event) {
 
     }
 
-    @Override
-    public PlayState state(AnimationState<DefaultBlockTile<ForgeAnvilTileEntity>> state) {
-        state.setAndContinue(set());
+    public void particleKeyframeHandler(ParticleKeyframeEvent<ForgeAnvilTileEntity> event) {
+
+    }
+
+
+    public PlayState state(AnimationState<ForgeAnvilTileEntity> state) {
+        state.setAndContinue(state.isMoving() ? begin().thenPlayAndHold(running.get()) : begin().thenLoop(rest.get()));
         return PlayState.CONTINUE;
     }
 
-    @Override
-    public RawAnimation set() {
-        return begin().thenPlayAndHold(running.get());
+    public enum Raws implements Supplier<String> {
+        rest,
+        running;
+
+        @Override
+        public String get() {
+            return name();
+        }
     }
 
 }

@@ -186,7 +186,6 @@ public class Utils {
     @SuppressWarnings("UnusedReturnValue")
     public static ConcurrentHashMap<ResourceLocation, RBI> copyResources(
             ConcurrentHashMap<ResourceLocation, RBI> cmp,
-            ConcurrentHashMap<ResourceLocation, BIMG> images,
             int insertX,
             int insertY,
             boolean isBase,
@@ -194,14 +193,41 @@ public class Utils {
             Item... items
     ) {
         for (Item item : items) {
-            copyResources(cmp, images, item, insertX, insertY, isBase, isGeneration);
+            copyResources(cmp, item, insertX, insertY, isBase, isGeneration);
         }
         return cmp;
     }
 
     public static void copyResources(
             ConcurrentHashMap<ResourceLocation, RBI> cmp,
-            ConcurrentHashMap<ResourceLocation, BIMG> images,
+            Item item,
+            int insertX,
+            int insertY,
+            boolean isBase,
+            boolean isGeneration,
+            ResourceLocation location
+    ) {
+        // String path
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item).withSuffix(".png");
+        try (InputStream resourceAsStream = Utils.class.getResourceAsStream("/assets/%s/textures/item/%s".formatted(location.getNamespace(), location.getPath()))) {
+            Objects.requireNonNull(resourceAsStream);
+            BufferedImage read = ImageIO.read(resourceAsStream);
+
+            addResources(cmp, key, read.getWidth(), read.getHeight(), img -> {
+                img
+                        .create()
+                        .composite(Clear)
+                        .create()
+                        .insertImage(read, 0, 0);
+            }, insertX, insertY, isBase, isGeneration);
+        } catch (IOException ignored) {
+
+        }
+
+    }
+
+    public static void copyResources(
+            ConcurrentHashMap<ResourceLocation, RBI> cmp,
             Item item,
             int insertX,
             int insertY,

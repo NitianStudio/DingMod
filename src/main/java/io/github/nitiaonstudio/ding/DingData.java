@@ -51,12 +51,14 @@ public class DingData {
                 .add(SoundRegistry.ding, "ding~ding")
                 .add(ItemRegistry.forge_hammer, "forge hammer")
                 .add(TranslateKeyRegistry.forgeAnvilValue, "Forge Anvil Value: ")
+                .add(TranslateKeyRegistry.destroyed, "[destroyed] ")
 
                 .languageSelect(Languages.zh_cn)
                 .add(BlockRegistry.forge_anvil_block, "锻造砧"))
                 .add(SoundRegistry.ding, "叮~叮")
                 .add(ItemRegistry.forge_hammer, "锻造锤")
                 .add(TranslateKeyRegistry.forgeAnvilValue, "锻造数：")
+                .add(TranslateKeyRegistry.destroyed, "【已损坏】 ")
         ;
         Display translation = new Display().rotation(55,0,0).translation(0, -5.25, -2);
         generator.addProvider(event.includeClient(), new ModelProvider(packOutput, MODID)

@@ -7,7 +7,7 @@
 		"rest": {
 			"animation_length": 3,
 			"bones": {
-				"hammer": {
+				"hoe": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -28,7 +28,7 @@
 		"running": {
 			"animation_length": 0.6667,
 			"bones": {
-				"hammer": {
+				"hoe": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]

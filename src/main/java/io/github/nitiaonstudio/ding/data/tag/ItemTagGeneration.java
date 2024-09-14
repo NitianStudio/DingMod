@@ -1,6 +1,7 @@
 package io.github.nitiaonstudio.ding.data.tag;
 
 import io.github.nitiaonstudio.ding.data.FunctionIII;
+import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import io.github.nitiaonstudio.ding.registry.TagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -88,6 +89,7 @@ public class ItemTagGeneration extends ItemTagsProvider {
 
         nugget.add(Items.IRON_NUGGET, Items.GOLD_NUGGET);
         star.add(Items.NETHER_STAR);
+        ding.add(ItemRegistry.forge_hammer.get());
 
     }
 

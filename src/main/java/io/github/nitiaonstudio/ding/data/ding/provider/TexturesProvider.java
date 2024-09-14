@@ -7,6 +7,7 @@ import io.github.nitiaonstudio.ding.data.RBI;
 import io.github.nitiaonstudio.ding.data.resources.BIMG;
 import io.github.nitiaonstudio.ding.data.resources.RLSs;
 import io.github.nitiaonstudio.ding.data.resources.Utils;
+import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import lombok.Getter;
 import lombok.experimental.ExtensionMethod;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -71,33 +72,35 @@ public class TexturesProvider implements DataProvider {
         
 
 
-        cmp.copyResources(images,0, 32, false, true,
+        cmp.copyResources(0, 32, false, true,
                         IRON_INGOT, COPPER_INGOT, GOLD_INGOT, NETHERITE_INGOT);
-        cmp.copyResources(images, 16, 32, false, true, DIAMOND);
-        cmp.copyResources(images, 32, 32, false, true, EMERALD);
-        cmp.copyResources(images, 48, 32, false, true,
+        cmp.copyResources( 16, 32, false, true, DIAMOND);
+        cmp.copyResources( 32, 32, false, true, EMERALD);
+        cmp.copyResources( 48, 32, false, true,
                         IRON_AXE, WOODEN_AXE, GOLDEN_AXE, NETHERITE_AXE, DIAMOND_AXE, STONE_AXE);
-        cmp.copyResources(images, 64, 32, false, true,
+        cmp.copyResources( 64, 32, false, true,
                         IRON_PICKAXE, WOODEN_PICKAXE, GOLDEN_PICKAXE, NETHERITE_PICKAXE, DIAMOND_PICKAXE, STONE_PICKAXE);
-        cmp.copyResources(images, 48, 0, false, true,
+        cmp.copyResources( 48, 0, false, true,
                         IRON_SWORD, WOODEN_SWORD, GOLDEN_SWORD, NETHERITE_SWORD, DIAMOND_SWORD, STONE_SWORD);
-        cmp.copyResources(images, 48, 16, false, true,
+        cmp.copyResources( 48, 16, false, true,
                         IRON_HOE, WOODEN_HOE, GOLDEN_HOE, NETHERITE_HOE, DIAMOND_HOE, STONE_HOE);
-        cmp.copyResources(images, 64, 0, false, true,
+        cmp.copyResources(64, 0, false, true,
                         IRON_CHESTPLATE, GOLDEN_CHESTPLATE, NETHERITE_CHESTPLATE, DIAMOND_CHESTPLATE, CHAINMAIL_CHESTPLATE);
-        cmp.copyResources(images, 64, 16, false, true,
+        cmp.copyResources(64, 16, false, true,
                         IRON_HELMET, GOLDEN_HELMET, NETHERITE_HELMET, DIAMOND_HELMET, CHAINMAIL_HELMET);
-        cmp.copyResources(images, 80, 0, false, true,
+        cmp.copyResources(80, 0, false, true,
                         IRON_LEGGINGS, GOLDEN_LEGGINGS, NETHERITE_LEGGINGS, DIAMOND_LEGGINGS, CHAINMAIL_LEGGINGS);
-        cmp.copyResources(images, 80, 16, false, true,
+        cmp.copyResources(80, 16, false, true,
                         IRON_BOOTS, GOLDEN_BOOTS, NETHERITE_BOOTS, DIAMOND_BOOTS, CHAINMAIL_BOOTS);
-        cmp.copyResources(images, 80, 32, false, true,
+        cmp.copyResources(80, 32, false, true,
                         IRON_NUGGET, GOLD_NUGGET);
-        cmp.copyResources(images, 96, 0, false, true,
+        cmp.copyResources(96, 0, false, true,
                         NETHER_STAR);
-
-
-
+        cmp.copyResources(ItemRegistry.forge_hammer.get(),96, 16, false, true,
+                Ding.id("forge_hammer/base.png"));
+//        cmp.copyResources(new ResourceLocation[] {
+//                Ding.id("forge_hammer/base")
+//        },96, 16, false, true);
 
 //        "/assets/minecraft/textures/item/netherite_ingot.png".preGeneration();
 
@@ -120,7 +123,7 @@ public class TexturesProvider implements DataProvider {
                     RBI rbi1 = e.getValue();
                     if (rbi1.isGeneration() && !rbi1.isBase()) {
                         String[] split1 = location.getPath().split("/");
-                        cmp.add(modid, "block/forge_anvil_block/%s/%s_%s".formatted(resourceLocation.getNamespace(), s.replace(".png", ""), split1[split1.length - 1]), 256, 256, img -> {
+                        cmp.add(modid, "block/forge_anvil_block/%s/%s_%s".formatted(location.getNamespace(), s.replace(".png", ""), split1[split1.length - 1]), 256, 256, img -> {
                             img
                                     .sameCode(cmp, getImages(), resourceLocation)
                                     .sameCode(cmp, getImages(), location)

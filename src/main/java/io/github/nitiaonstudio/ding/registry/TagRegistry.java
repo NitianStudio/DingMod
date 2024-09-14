@@ -30,7 +30,7 @@ public class TagRegistry {
         star,
         ;
         private final TagKey<Item> tag;
-        public static final List<TagRegistry.Items> forge_anvil_block_tags = List.of(ingot, diamond, gem, pickaxe, shovel, axe, sword, hoe, chest, helmet, legging, boot, nugget, star);
+        public static final List<TagRegistry.Items> forge_anvil_block_tags = List.of(ingot, diamond, gem, pickaxe, shovel, axe, sword, hoe, chest, helmet, legging, boot, nugget, star, ding);
         Items() {
             tag = dingTags(name().toLowerCase(Locale.ROOT));
         }

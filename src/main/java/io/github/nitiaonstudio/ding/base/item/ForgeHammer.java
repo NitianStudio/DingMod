@@ -1,43 +1,49 @@
 package io.github.nitiaonstudio.ding.base.item;
 
 import io.github.nitiaonstudio.ding.Ding;
-import io.github.nitiaonstudio.ding.base.block.ForgeAnvilBlock;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import io.github.nitiaonstudio.ding.registry.BlockRegistry;
 import io.github.nitiaonstudio.ding.registry.ComponentRegistry;
 import io.github.nitiaonstudio.ding.registry.SoundRegistry;
+import io.github.nitiaonstudio.ding.registry.TranslateKeyRegistry;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.commands.SummonCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Random;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.loading.math.MathParser;
-import software.bernie.geckolib.loading.math.MolangQueries;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
+import static io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity.Raws.rest;
+import static io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity.Raws.running;
 import static software.bernie.geckolib.animation.RawAnimation.begin;
 
 
@@ -55,7 +61,7 @@ public class ForgeHammer extends Item implements GeoItem {
     }
 
     public PlayState predicate(AnimationState<ForgeHammer> state) {
-        state.getController().setAnimation(RawAnimation.begin().then("rest", Animation.LoopType.LOOP));
+        state.getController().setAnimation(state.isMoving() ? begin().thenPlay(running.get()) : begin().thenLoop(rest.get()));
         state.getController().triggerableAnim("run", begin().thenPlay("running"));
 
         return PlayState.CONTINUE;
@@ -105,27 +111,48 @@ public class ForgeHammer extends Item implements GeoItem {
         Level level = context.getLevel();
         Player player = context.getPlayer();
         ItemStack itemInHand = context.getItemInHand();
-
-        if (level instanceof ServerLevel serverLevel && itemInHand.getOrDefault(ComponentRegistry.cd, 0) <= 0) {
+        int damageValue = itemInHand.getDamageValue();
+        if (level instanceof ServerLevel serverLevel && itemInHand.getOrDefault(ComponentRegistry.cd, 0) <= 0 && damageValue < itemInHand.getMaxDamage()) {
             itemInHand.set(ComponentRegistry.cd, maxCd);
             triggerAnim(player, GeoItem.getOrAssignId(itemInHand, serverLevel), "ForgeHammer", "run");
             BlockState blockState = serverLevel.getBlockState(clickedPos);
             BlockEntity blockEntity = serverLevel.getBlockEntity(clickedPos);
+
             if (blockState.is(BlockRegistry.forge_anvil_block) && blockEntity instanceof ForgeAnvilTileEntity tileEntity) {
-                Ding.LOGGER.info("test");
                 tileEntity.setMoveX(tileEntity.getToMoveX());
                 tileEntity.setMoveZ(tileEntity.getToMoveZ());
                 tileEntity.setRotateY(tileEntity.getToRotateY());
-                tileEntity.setToMoveX(randomSource.triangle(-7, 7));
-                tileEntity.setToMoveZ(randomSource.triangle(-7, 7));
-                tileEntity.setRotateY(randomSource.triangle(0, 60));
+                tileEntity.setToMoveX(randomSource.nextInt(-7, 7));
+                tileEntity.setToMoveZ(randomSource.nextInt(-7, 7));
+                tileEntity.setRotateY(randomSource.nextInt(0, 60));
                 tileEntity.setHold(true);
+                tileEntity.setChanged();
                 ItemStack stack = tileEntity.getStack();
                 DataComponentType<Integer> doubleDataComponentType = ComponentRegistry.forgeAnvilValue.get();
-                stack.set(doubleDataComponentType, stack.getOrDefault(doubleDataComponentType, 0) + 1);
-                serverLevel.playLocalSound(clickedPos, SoundRegistry.ding.get(), SoundSource.MUSIC, 1F, 1.0F, true);
-                tileEntity.setChanged();
-                tileEntity.triggerAnim("defaultBlockTile", "run");
+                int orDefault = stack.getOrDefault(doubleDataComponentType, 0);
+                if (orDefault >= 1000000000) {
+                    stack.set(doubleDataComponentType, orDefault + 1);
+                    serverLevel.playLocalSound(clickedPos, SoundRegistry.ding.get(), SoundSource.MUSIC, 1F, 1.0F, true);
+                    tileEntity.triggerAnim("ForgeAnvilBlock", "run");
+                    if (orDefault % 500 == 499) {
+                        int orDefault1 = itemInHand.getOrDefault(doubleDataComponentType, 0);
+                        if (orDefault1 >= 100 && itemInHand.getDamageValue() > 0) {//锤子大于等于100的时候启用修复功能, 每300锻造值增加1个修复点
+                            itemInHand.setDamageValue(itemInHand.getDamageValue() - (orDefault1 % 300));
+                        }
+                        LightningBolt spawn = EntityType.LIGHTNING_BOLT.spawn(serverLevel, clickedPos, MobSpawnType.NATURAL);
+                        if (spawn != null) {
+                            serverLevel.addFreshEntity(spawn);
+                            if (randomSource.nextInt(1, 12) % 3 == 0) {
+                                tileEntity.setStack(ItemStack.EMPTY);
+                                tileEntity.setChanged();
+                            }
+                        }
+
+                    }
+
+                    int i = damageValue + 1;
+                    itemInHand.setDamageValue(i);
+                }
 
             }
         }
@@ -134,8 +161,17 @@ public class ForgeHammer extends Item implements GeoItem {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-
         controllers.add(new AnimationController<>(this, "ForgeHammer", this::predicate));
+    }
+
+    @Override
+    public @NotNull Component getName(@NotNull ItemStack stack) {
+
+        MutableComponent append = Component.empty().append(super.getName(stack));
+        if (stack.getDamageValue() == stack.getMaxDamage()) {
+            return append.append(TranslateKeyRegistry.destroyed);
+        }
+        return append;
     }
 
     @Override
