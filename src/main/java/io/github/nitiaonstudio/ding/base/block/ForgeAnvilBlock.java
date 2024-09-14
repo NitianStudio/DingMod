@@ -6,6 +6,7 @@ import io.github.nitiaonstudio.ding.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -124,50 +126,6 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
     @Override
     public @NotNull DamageSource getFallDamageSource(Entity entity) {
         return entity.damageSources().anvil(entity);
-    }
-
-
-
-    //使用方块
-    @Override
-    @NotNull
-    protected InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
-        Optional<ForgeAnvilTileEntity> blockEntity = level.getBlockEntity(pos, (BlockEntityType<ForgeAnvilTileEntity>) BlockRegistry.BlockEntityRegistry.forge_anvil_block.get());
-        blockEntity.ifPresent(entity -> {
-            ItemStack mainHandItem = player.getMainHandItem();
-            ItemStack offhandItem = player.getOffhandItem();
-            if (entity.getStack().isEmpty()) {
-
-                if (!mainHandItem.isEmpty()) {
-                    ItemStack copy = mainHandItem.copy();
-                    copy.setCount(1);
-                    entity.setStack(copy);
-                    if (mainHandItem.getCount() == 1) {
-                        player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                    } else {
-                        mainHandItem.setCount(mainHandItem.getCount() - 1);
-                        player.setItemSlot(EquipmentSlot.MAINHAND, mainHandItem);
-                    }
-                }
-                else if (!offhandItem.isEmpty()) {
-                    ItemStack copy = offhandItem.copy();
-                    copy.setCount(1);
-                    entity.setStack(copy);
-                    if (offhandItem.getCount() == 1) {
-                        player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
-                    } else {
-                        offhandItem.setCount(offhandItem.getCount() - 1);
-                        player.setItemSlot(EquipmentSlot.OFFHAND, mainHandItem);
-                    }
-                }
-            }
-            else
-            if (mainHandItem.isEmpty() && offhandItem.isEmpty()) {
-                level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), entity.getStack().copy()));
-                entity.setStack(ItemStack.EMPTY);
-            }
-        });// 装卸货
-        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     public VoxelShape makeShape(){

@@ -27,4 +27,22 @@ public class GeckolibModel {
 
     @SerializedName("texture_size")
     public  int[] texture_size;
+
+    @SerializedName("thirdperson_righthand")
+    public Display thirdperson_righthand;
+
+    @SerializedName("thirdperson_lefthand")
+    public Display thirdperson_lefthand;
+
+    @SerializedName("firstperson_righthand")
+    public Display firstperson_righthand;
+
+    @SerializedName("firstperson_lefthand")
+    public Display firstperson_lefthand;
+
+    @SerializedName("gui")
+    public Display gui;
+
+    @SerializedName("fixed")
+    public Display fixed;
 }

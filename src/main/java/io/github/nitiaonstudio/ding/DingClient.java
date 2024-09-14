@@ -24,7 +24,8 @@ public class DingClient {
                 Renders.forgeAnvilBlockMoveX,
                 Renders.forgeAnvilBlockMoveToX,
                 Renders.forgeAnvilBlockMoveZ,
-                Renders.forgeAnvilBlockMoveToZ
+                Renders.forgeAnvilBlockMoveToZ,
+                Renders.id
         );
     }
 

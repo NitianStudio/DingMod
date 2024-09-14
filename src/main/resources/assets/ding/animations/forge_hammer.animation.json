@@ -1,0 +1,57 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"forge_hammer": {
+			"loop": true
+		},
+		"rest": {
+			"animation_length": 3,
+			"bones": {
+				"hammer": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [5, 0, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0": {
+							"vector": [-5, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"running": {
+			"animation_length": 0.6667,
+			"bones": {
+				"hammer": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0833": {
+							"vector": [-40, 0, 0]
+						},
+						"0.2917": {
+							"vector": [11, 0, 0]
+						},
+						"0.3333": {
+							"vector": [6, 0, 0]
+						},
+						"0.4583": {
+							"vector": [11, 0, 0]
+						},
+						"0.6667": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

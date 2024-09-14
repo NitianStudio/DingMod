@@ -12,6 +12,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
@@ -58,6 +60,13 @@ public final class DingLanguageProvider implements DataProvider {
 
     public DingLanguageProvider add(String key, String translate) {
         targetSelect.put(key, translate);
+        return this;
+    }
+
+    public DingLanguageProvider add(MutableComponent component, String translate) {
+        if (component.getContents() instanceof TranslatableContents translatableContents) {
+            targetSelect.put(translatableContents.getKey(), translate);
+        }
         return this;
     }
 

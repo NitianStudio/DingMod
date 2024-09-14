@@ -3,25 +3,25 @@ package io.github.nitiaonstudio.ding.base.tile;
 import io.github.nitiaonstudio.ding.base.geo.DefaultBlockTile;
 import io.github.nitiaonstudio.ding.base.property.object.Modes;
 import io.github.nitiaonstudio.ding.registry.BlockRegistry;
-import io.github.nitiaonstudio.ding.registry.SoundRegistry;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.With;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
+import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
+import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.animation.keyframe.event.ParticleKeyframeEvent;
 import software.bernie.geckolib.animation.keyframe.event.SoundKeyframeEvent;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import static io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity.Raws.rest;
@@ -45,14 +45,17 @@ public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity>
 
 
     private ItemStack stack = ItemStack.EMPTY;
-    private int cd;//当cd为0的时候可以再次锻打
     private double rotateY, moveX, moveZ;
     private double toRotateY, toMoveX, toMoveZ;
     private Modes MODE = Modes.BASE;
-    private Raws animationName = rest;
+    private boolean hold = false;
 
     public ForgeAnvilTileEntity(BlockPos pos, BlockState blockState) {
-        super(BlockRegistry.BlockEntityRegistry.forge_anvil_block.get(), pos, blockState);
+        super(BlockRegistry.BlockEntityRegistry.forge_anvil_block.get(), pos, blockState, controller -> {
+            controller.triggerableAnim("run", begin().thenPlay(running.get()));
+        });
+        SingletonGeoAnimatable.registerSyncedAnimatable(this);
+
     }
 
     @Override
@@ -64,7 +67,7 @@ public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity>
         if (stack1 != null) {
             ItemStack.parse(registries, stack1).ifPresent(itemStack -> stack = itemStack);
         }
-        cd = tag.getInt("anvil_cd");
+
         rotateY = tag.getDouble("rotate_y");
         toRotateY = tag.getDouble("to_rotate_y");
         moveX = tag.getDouble("move_x");
@@ -73,18 +76,30 @@ public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity>
         toMoveZ = tag.getDouble("to_move_z");
         String mode = tag.getString("mode");
         MODE = mode.isEmpty() ? Modes.BASE : Modes.valueOf(mode);
-        String animation_name = tag.getString("animation_name");
-        animationName = animation_name.isEmpty() ? rest : Raws.valueOf(animation_name);
     }
 
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
 
+    @Override
+    public void handleUpdateTag(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
+        super.handleUpdateTag(tag, lookupProvider);
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider registries) {
+
+        return saveWithoutMetadata(registries);
+    }
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.saveAdditional(tag, registries);
         if (stack != ItemStack.EMPTY)
             tag.put("anvil_stack", stack.save(registries, tag));
-        tag.putInt("anvil_cd", cd);
         tag.putDouble("rotate_y", rotateY);
         tag.putDouble("to_rotate_y", toRotateY);
         tag.putDouble("move_x", moveX);
@@ -92,49 +107,29 @@ public class ForgeAnvilTileEntity extends DefaultBlockTile<ForgeAnvilTileEntity>
         tag.putDouble("move_z", moveZ);
         tag.putDouble("to_move_z", toMoveZ);
         tag.putString("mode",MODE.name());
-        tag.putString("animation_name", animationName.get());
     }
 
     @Override
     protected void soundKeyFrameHandler(SoundKeyframeEvent<DefaultBlockTile<ForgeAnvilTileEntity>> event) {
-        BlockPos blockPos = getBlockPos();
-        if (event.getKeyframeData().getSound().matches(running.get())) {
-            if (level != null)
-                if (level.isClientSide()) {
-                    level.playLocalSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.ding.get(), SoundSource.HOSTILE, 0.25F, 1.0F, false);
-                }
-        }
+
+        super.soundKeyFrameHandler(event);
     }
 
     @Override
     public void particleKeyframeHandler(ParticleKeyframeEvent<DefaultBlockTile<ForgeAnvilTileEntity>> event) {
-        AnimationController.State animationState = event.getController().getAnimationState();
-        if (animationState.equals(AnimationController.State.STOPPED)) {
-            moveX = toMoveX;
-            moveZ = toMoveZ;
-            rotateY = toRotateY;
-            animationName = rest;
-            tick = 0;
-            event.getController().setAnimation(set());
-        }
+        super.particleKeyframeHandler(event);
+
     }
 
     @Override
     public PlayState state(AnimationState<DefaultBlockTile<ForgeAnvilTileEntity>> state) {
-
-        return state
-                .setAndContinue(set());
+        state.setAndContinue(set());
+        return PlayState.CONTINUE;
     }
 
     @Override
     public RawAnimation set() {
-        RawAnimation begin = begin();
-        if (animationName == rest) {
-            begin.thenLoop(animationName.get());
-        } else {
-            begin.thenPlayAndHold(animationName.get());
-        }
-        return begin;
+        return begin().thenPlayAndHold(running.get());
     }
 
 }

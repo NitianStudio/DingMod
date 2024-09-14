@@ -18,6 +18,7 @@ public class AllRegistry {
     public static void registerAll(IEventBus modEventBus) {
         ComponentRegistry.registry();
         BlockRegistry.registry();
+        ItemRegistry.registry();
         SoundRegistry.registry();
         components.register(modEventBus);
         sounds.register(modEventBus);

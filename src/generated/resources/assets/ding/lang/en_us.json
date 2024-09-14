@@ -1,4 +1,6 @@
 {
   "block.ding.forge_anvil_block": "forge anvil block",
-  "sound.ding.ding": "ding~ding"
+  "sound.ding.ding": "ding~ding",
+  "item.ding.forge_hammer": "forge hammer",
+  "ding.mod.forge.anvil.value": "Forge Anvil Value: "
 }

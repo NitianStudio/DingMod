@@ -27,6 +27,7 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 @ExtensionMethod({Utils.class})
 @Getter
@@ -41,16 +42,19 @@ public final class ModelProvider implements DataProvider {
         this.output = output;
     }
 
-    public ModelProvider addGeckolibBlockModel(Block block, int width, int height) {
-        models.put(BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/"), new GeckolibModel().setCredit("Data generation by baka4n").setParent("builtin/entity").setTexture_size(new int[] { width, height }));
+    public ModelProvider addGeckolibBlockModel(Block block, int width, int height, Consumer<GeckolibModel> consumer) {
+        GeckolibModel geckolibModel = new GeckolibModel();
+        models.put(BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/"), geckolibModel.setCredit("Data generation by baka4n").setParent("builtin/entity").setTexture_size(new int[] { width, height }));
+        consumer.accept(geckolibModel);
         Item item = block.asItem();
-        return item != Items.AIR ? addGeckolibItemModel(item, width, height) : this;
+        return item != Items.AIR ? addGeckolibItemModel(item, width, height, consumer) : this;
     }
 
-    public ModelProvider addGeckolibItemModel(Item item, int width, int height) {
+    public ModelProvider addGeckolibItemModel(Item item, int width, int height, Consumer<GeckolibModel> consumer) {
 
-
-        models.put(BuiltInRegistries.ITEM.getKey(item).withPrefix("item/"), new GeckolibModel().setCredit("Data generation by baka4n").setParent("builtin/entity").setTexture_size(new int[] { width, height }));
+        GeckolibModel geckolibModel = new GeckolibModel();
+        models.put(BuiltInRegistries.ITEM.getKey(item).withPrefix("item/"), geckolibModel.setCredit("Data generation by baka4n").setParent("builtin/entity").setTexture_size(new int[] { width, height }));
+        consumer.accept(geckolibModel);
         return this;
     }
 

@@ -1,6 +1,7 @@
 package io.github.nitiaonstudio.ding.registry;
 
 import io.github.nitiaonstudio.ding.Ding;
+import io.github.nitiaonstudio.ding.base.geo.molang.ForgeAnvilBlockFunction;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +20,7 @@ public class Renders {
     public static final String forgeAnvilBlockMoveToX = "forge.anvil.block.move.to.x";
     public static final String forgeAnvilBlockMoveZ = "forge.anvil.block.move.z";
     public static final String forgeAnvilBlockMoveToZ = "forge.anvil.block.move.to.z";
+    public static final String id = "geckolib.id";
     public static final GeoBlockRenderer<ForgeAnvilTileEntity> forge_anvil_block_renderer = new GeoBlockRenderer<>(new GeoModel<>() {
 
         @Override
@@ -50,7 +52,6 @@ public class Renders {
         @Override
         public void applyMolangQueries(AnimationState<ForgeAnvilTileEntity> animationState, double animTime) {
             ForgeAnvilTileEntity entity = animationState.getAnimatable();
-
             MathParser.setVariable(forgeAnvilBlockRotateY, entity::getRotateY);
             MathParser.setVariable(forgeAnvilBlockRotateToY, entity::getToRotateY);
             MathParser.setVariable(forgeAnvilBlockMoveX, entity::getMoveX);

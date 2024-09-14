@@ -1,4 +1,6 @@
 {
   "block.ding.forge_anvil_block": "锻造砧",
-  "sound.ding.ding": "叮~叮"
+  "sound.ding.ding": "叮~叮",
+  "item.ding.forge_hammer": "锻造锤",
+  "ding.mod.forge.anvil.value": "锻造数："
 }

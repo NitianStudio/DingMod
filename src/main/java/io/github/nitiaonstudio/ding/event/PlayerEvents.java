@@ -1,11 +1,15 @@
 package io.github.nitiaonstudio.ding.event;
 
 import io.github.nitiaonstudio.ding.base.block.ForgeAnvilBlock;
+import io.github.nitiaonstudio.ding.base.item.ForgeHammer;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import io.github.nitiaonstudio.ding.registry.BlockRegistry;
+import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import io.github.nitiaonstudio.ding.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,13 +20,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import software.bernie.geckolib.animatable.GeoItem;
 
 import java.util.function.Consumer;
+
+import static io.github.nitiaonstudio.ding.Ding.LOGGER;
 
 public class PlayerEvents {
 
     @SubscribeEvent
     public void leftClickAnvilBlock(PlayerInteractEvent.LeftClickBlock event) {
+
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
         Player player = event.getEntity();
@@ -34,6 +42,14 @@ public class PlayerEvents {
             }
             player.addItem(stack);
             forgeAnvilTile.setStack(ItemStack.EMPTY);
+            forgeAnvilTile.setMoveX(0);
+            forgeAnvilTile.setToMoveX(0);
+            forgeAnvilTile.setMoveZ(0);
+            forgeAnvilTile.setToMoveZ(0);
+            forgeAnvilTile.setRotateY(0);
+            forgeAnvilTile.setToRotateY(0);
+            forgeAnvilTile.setChanged();
+
 
         }
     }
@@ -77,10 +93,10 @@ public class PlayerEvents {
 
 
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof ForgeAnvilTileEntity) {
+        if (blockEntity instanceof ForgeAnvilTileEntity forgeAnvilTile) {
             ItemStack mainHandItem = player.getMainHandItem();
             ItemStack offhandItem = player.getOffhandItem();
-            if (((ForgeAnvilTileEntity) blockEntity).getStack().isEmpty()) {
+            if (forgeAnvilTile.getStack().isEmpty()) {
 
                 if (!mainHandItem.isEmpty() && TagRegistry.Items.forge_anvil_block_tags
                         .stream()
@@ -89,7 +105,7 @@ public class PlayerEvents {
                 ) {
                     ItemStack copy = mainHandItem.copy();
                     copy.setCount(1);
-                    setBlockEntity(mainHandItem, (ForgeAnvilTileEntity) blockEntity, tile -> tile.setStack(copy));
+                    setBlockEntity(mainHandItem, forgeAnvilTile, tile -> tile.setStack(copy));
                 } else if (!offhandItem.isEmpty() && TagRegistry.Items.forge_anvil_block_tags
                         .stream()
                         .map(TagRegistry.Items::get)
@@ -97,7 +113,7 @@ public class PlayerEvents {
                 ) {
                     ItemStack copy = offhandItem.copy();
                     copy.setCount(1);
-                    setBlockEntity(offhandItem,  (ForgeAnvilTileEntity) blockEntity, tile -> tile.setStack(copy));
+                    setBlockEntity(offhandItem, forgeAnvilTile, tile -> tile.setStack(copy));
                 }
             }
         }
@@ -118,6 +134,7 @@ public class PlayerEvents {
     private <T extends BlockEntity> T setBlockEntity(ItemStack hand, T forgeAnvilTile, Consumer<T> consumer) {
         hand.setCount(hand.getCount() - 1);
         consumer.accept(forgeAnvilTile);
+        forgeAnvilTile.setChanged();
         return forgeAnvilTile;
     }
 }

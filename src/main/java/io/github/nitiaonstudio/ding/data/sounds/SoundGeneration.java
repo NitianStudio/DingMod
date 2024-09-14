@@ -19,11 +19,12 @@ public class SoundGeneration extends SoundDefinitionsProvider {
     public void add(DeferredHolder<SoundEvent, SoundEvent> holder, Consumer<SoundDefinition> consumer) {
         SoundDefinition definition = definition();
         consumer.accept(definition);
-        add(holder.unwrapKey().orElseThrow().location(), definition);
+        add(holder, definition);
     }
 
     public void add(DeferredHolder<SoundEvent, SoundEvent> holder) {
-        add(holder.unwrapKey().orElseThrow().location(), definition());
+
+        add(holder, definition());
     }
 
     @Override
@@ -32,7 +33,8 @@ public class SoundGeneration extends SoundDefinitionsProvider {
             ResourceLocation location = SoundRegistry.ding.get().getLocation();
             definition
                     .subtitle("sound.%s.%s".formatted(location.getNamespace(), location.getPath()))
-                    .with(sound(location, SoundDefinition.SoundType.SOUND).attenuationDistance(5));
+                    .replace(true)
+                    .with(sound(location, SoundDefinition.SoundType.SOUND).volume(0.8).pitch(1.2).weight(2).attenuationDistance(8).stream().preload());
         });
     }
 }
