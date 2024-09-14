@@ -134,11 +134,11 @@ public class ForgeHammer extends Item implements GeoItem {
                     stack.set(doubleDataComponentType, orDefault + 1);
                     serverLevel.playLocalSound(clickedPos, SoundRegistry.ding.get(), SoundSource.MUSIC, 1F, 1.0F, true);
                     tileEntity.triggerAnim("ForgeAnvilBlock", "run");
+                    int orDefault1 = itemInHand.getOrDefault(doubleDataComponentType, 0);
+                    if (orDefault1 >= 100 && itemInHand.getDamageValue() > 0) {//锤子大于等于100的时候启用修复功能, 每300锻造值增加1个修复点
+                        itemInHand.setDamageValue(itemInHand.getDamageValue() - (orDefault1 % 300));
+                    }
                     if (orDefault % 500 == 499) {
-                        int orDefault1 = itemInHand.getOrDefault(doubleDataComponentType, 0);
-                        if (orDefault1 >= 100 && itemInHand.getDamageValue() > 0) {//锤子大于等于100的时候启用修复功能, 每300锻造值增加1个修复点
-                            itemInHand.setDamageValue(itemInHand.getDamageValue() - (orDefault1 % 300));
-                        }
                         LightningBolt spawn = EntityType.LIGHTNING_BOLT.spawn(serverLevel, clickedPos, MobSpawnType.NATURAL);
                         if (spawn != null) {
                             serverLevel.addFreshEntity(spawn);
