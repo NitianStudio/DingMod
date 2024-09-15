@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -108,7 +109,6 @@ public class ForgeHammer extends Item implements GeoItem {
         Player player = context.getPlayer();
         ItemStack itemInHand = context.getItemInHand();
         int damageValue = itemInHand.getDamageValue();
-
         //是服务器世界， 手上物品cd<=0 耐久值不是满值
         if (level instanceof ServerLevel serverLevel && itemInHand.getOrDefault(ComponentRegistry.cd, 0) <= 0 && damageValue < itemInHand.getMaxDamage()) {
             itemInHand.set(ComponentRegistry.cd, maxCd);
@@ -121,7 +121,8 @@ public class ForgeHammer extends Item implements GeoItem {
                 int orDefault = stack.getOrDefault(doubleDataComponentType, 0);
                 if (orDefault <= 1000000000) {
                     stack.set(doubleDataComponentType, orDefault + 1);
-                    serverLevel.playLocalSound(clickedPos, SoundRegistry.ding.get(), SoundSource.MUSIC, 1F, 1.0F, true);
+
+                    serverLevel.playSound(null, clickedPos, SoundRegistry.ding.get(), SoundSource.VOICE, 1F, 1.0F);
                     tileEntity.triggerAnim("ForgeAnvilBlock", "run");
                     int orDefault1 = itemInHand.getOrDefault(doubleDataComponentType, 0);
                     if (orDefault1 >= 100 && itemInHand.getDamageValue() > 0) {//锤子大于等于100的时候启用修复功能, 每300锻造值增加1个修复点
