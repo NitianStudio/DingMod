@@ -1,6 +1,5 @@
 package io.github.nitiaonstudio.ding.data.ding.provider;
 
-import io.github.nitiaonstudio.ding.base.item.ForgeHammer;
 import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,10 +8,8 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
