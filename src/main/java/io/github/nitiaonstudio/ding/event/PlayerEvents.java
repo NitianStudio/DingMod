@@ -3,22 +3,55 @@ package io.github.nitiaonstudio.ding.event;
 import io.github.nitiaonstudio.ding.base.block.ForgeAnvilBlock;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import io.github.nitiaonstudio.ding.registry.BlockRegistry;
+import io.github.nitiaonstudio.ding.registry.ComponentRegistry;
 import io.github.nitiaonstudio.ding.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.function.Consumer;
 
 
 public class PlayerEvents {
+
+    @SubscribeEvent
+    public void attackEntity(LivingDamageEvent.Pre event) {
+        DamageContainer container = event.getContainer();
+        DamageSource source = container.getSource();
+        if (source.getDirectEntity() instanceof AbstractArrow) {
+            return;
+        }
+
+        if (source.getEntity() instanceof LivingEntity livingEntity) {
+            ItemStack stack = livingEntity.getMainHandItem();
+
+            if (stack.has(ComponentRegistry.forgeAnvilValue)) {
+                int orDefault = stack.getOrDefault(ComponentRegistry.forgeAnvilValue, 0);
+                container.addModifier(DamageContainer.Reduction.ABSORPTION, (c, r) -> r + (float) orDefault / 100);
+            }
+        }
+
+    }
+
+    @SubscribeEvent
+    public void breakSpeed(PlayerEvent.BreakSpeed event) {
+        ItemStack stack = event.getEntity().getMainHandItem();
+        if (stack.has(ComponentRegistry.forgeAnvilValue) && stack.is(TagRegistry.Items.pickaxe.get()))
+            event.setNewSpeed(event.getNewSpeed() + (float) stack.getOrDefault(ComponentRegistry.forgeAnvilValue, 0) / 100);
+    }
 
     /*
     空手左键单机取出物品
