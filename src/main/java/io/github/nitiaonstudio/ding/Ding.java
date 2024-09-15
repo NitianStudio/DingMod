@@ -61,7 +61,7 @@ public class Ding {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(new PlayerEvents());
-        NeoForge.EVENT_BUS.register(new AnvilEvents());
+//        NeoForge.EVENT_BUS.register(new AnvilEvents());
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

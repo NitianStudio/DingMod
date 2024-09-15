@@ -44,7 +44,7 @@ import static software.bernie.geckolib.animation.RawAnimation.begin;
 
 
 public class ForgeHammer extends Item implements GeoItem {
-    public static final RandomSource randomSource = RandomSource.create();
+    public final RandomSource randomSource = RandomSource.create();
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final String material;
@@ -66,7 +66,7 @@ public class ForgeHammer extends Item implements GeoItem {
     @Override
     public void inventoryTick(@NotNull ItemStack stack, @NotNull Level level, @NotNull Entity entity, int slotId, boolean isSelected) {
         super.inventoryTick(stack, level, entity, slotId, isSelected);
-        Integer orDefault = stack.getOrDefault(ComponentRegistry.cd, 0);
+        int orDefault = stack.getOrDefault(ComponentRegistry.cd, 0);
         if (orDefault > 0) {
             stack.set(ComponentRegistry.cd, --orDefault);
         }
@@ -108,25 +108,18 @@ public class ForgeHammer extends Item implements GeoItem {
         Player player = context.getPlayer();
         ItemStack itemInHand = context.getItemInHand();
         int damageValue = itemInHand.getDamageValue();
+
+        //是服务器世界， 手上物品cd<=0 耐久值不是满值
         if (level instanceof ServerLevel serverLevel && itemInHand.getOrDefault(ComponentRegistry.cd, 0) <= 0 && damageValue < itemInHand.getMaxDamage()) {
             itemInHand.set(ComponentRegistry.cd, maxCd);
-            triggerAnim(player, GeoItem.getOrAssignId(itemInHand, serverLevel), "ForgeHammer", "run");
-            BlockState blockState = serverLevel.getBlockState(clickedPos);
+            triggerAnim(player, GeoItem.getOrAssignId(itemInHand, serverLevel), "ForgeHammer_" + material, "run");
             BlockEntity blockEntity = serverLevel.getBlockEntity(clickedPos);
 
-            if (blockState.is(BlockRegistry.forge_anvil_block) && blockEntity instanceof ForgeAnvilTileEntity tileEntity) {
-                tileEntity.setMoveX(tileEntity.getToMoveX());
-                tileEntity.setMoveZ(tileEntity.getToMoveZ());
-                tileEntity.setRotateY(tileEntity.getToRotateY());
-                tileEntity.setToMoveX(randomSource.nextInt(-7, 7));
-                tileEntity.setToMoveZ(randomSource.nextInt(-7, 7));
-                tileEntity.setRotateY(randomSource.nextInt(0, 60));
-                tileEntity.setHold(true);
-                tileEntity.setChanged();
+            if (blockEntity instanceof ForgeAnvilTileEntity tileEntity) {
                 ItemStack stack = tileEntity.getStack();
                 DataComponentType<Integer> doubleDataComponentType = ComponentRegistry.forgeAnvilValue.get();
                 int orDefault = stack.getOrDefault(doubleDataComponentType, 0);
-                if (orDefault >= 1000000000) {
+                if (orDefault <= 1000000000) {
                     stack.set(doubleDataComponentType, orDefault + 1);
                     serverLevel.playLocalSound(clickedPos, SoundRegistry.ding.get(), SoundSource.MUSIC, 1F, 1.0F, true);
                     tileEntity.triggerAnim("ForgeAnvilBlock", "run");
@@ -157,7 +150,7 @@ public class ForgeHammer extends Item implements GeoItem {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "ForgeHammer", this::predicate));
+        controllers.add(new AnimationController<>(this, "ForgeHammer_" + material, this::predicate));
     }
 
     @Override

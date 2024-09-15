@@ -1,5 +1,6 @@
 {
   "block.ding.forge_anvil_block": "forge anvil block",
+  "item.ding.forge_hammer_gold": "forge hammer[gold]",
   "ding.mod.destroyed": "[destroyed] ",
   "sound.ding.ding": "ding~ding",
   "item.ding.forge_hammer": "forge hammer",

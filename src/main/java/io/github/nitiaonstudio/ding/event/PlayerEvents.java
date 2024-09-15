@@ -1,33 +1,28 @@
 package io.github.nitiaonstudio.ding.event;
 
 import io.github.nitiaonstudio.ding.base.block.ForgeAnvilBlock;
-import io.github.nitiaonstudio.ding.base.item.ForgeHammer;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import io.github.nitiaonstudio.ding.registry.BlockRegistry;
-import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import io.github.nitiaonstudio.ding.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import software.bernie.geckolib.animatable.GeoItem;
 
 import java.util.function.Consumer;
 
-import static io.github.nitiaonstudio.ding.Ding.LOGGER;
 
 public class PlayerEvents {
 
+    /*
+    空手左键单机取出物品
+     */
     @SubscribeEvent
     public void leftClickAnvilBlock(PlayerInteractEvent.LeftClickBlock event) {
 
@@ -53,7 +48,9 @@ public class PlayerEvents {
 
         }
     }
-
+    /*
+    当方块是铁砧时，放置指定tag组的材料就会变成锻造砧
+     */
     @SubscribeEvent
     public void rightClickAnvilBlock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();
@@ -84,6 +81,11 @@ public class PlayerEvents {
         }
     }
 
+    /*
+    当方块是锻造砧时
+    砧内没物品
+    把手上符合的物品塞入砧内
+     */
     @SubscribeEvent
     public void rightClickForgeAnvilBlock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();

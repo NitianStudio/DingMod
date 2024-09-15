@@ -47,6 +47,7 @@ public class DingData {
                 .add(BlockRegistry.forge_anvil_block, "forge anvil block")
                 .add(SoundRegistry.ding, "ding~ding")
                 .add(ItemRegistry.forge_hammer, "forge hammer")
+                .add(ItemRegistry.forge_hammer_gold, "forge hammer[gold]")
                 .add(TranslateKeyRegistry.forgeAnvilValue, "Forge Anvil Value: ")
                 .add(TranslateKeyRegistry.destroyed, "[destroyed] ")
 
@@ -54,30 +55,15 @@ public class DingData {
                 .add(BlockRegistry.forge_anvil_block, "锻造砧"))
                 .add(SoundRegistry.ding, "叮~叮")
                 .add(ItemRegistry.forge_hammer, "锻造锤")
+                .add(ItemRegistry.forge_hammer_gold, "锻造锤【金】")
                 .add(TranslateKeyRegistry.forgeAnvilValue, "锻造数：")
                 .add(TranslateKeyRegistry.destroyed, "【已损坏】 ")
         ;
         Display translation = new Display().rotation(55,0,0).translation(0, -5.25, -2);
         generator.addProvider(event.includeClient(), new ModelProvider(packOutput, MODID)
                 .addGeckolibBlockModel(BlockRegistry.forge_anvil_block.get(), 256, 256, geckolibModel -> {})
-                .addGeckolibItemModel(ItemRegistry.forge_hammer.get(), 32, 32, geckolibModel -> {
-                    geckolibModel
-                            .setThirdperson_righthand(translation)
-                            .setFirstperson_lefthand(translation)
-                            .setThirdperson_lefthand(translation)
-                            .setFirstperson_righthand(translation)
-                            .setGui(
-                                    new Display()
-                                            .translation(4.25, -5.75, 0)
-                                            .scale(0.8, 0.8, 0.8)
-                                            .rotation(0, 90, 0)
-                            )
-                            .setFixed(
-                                    new Display()
-                                            .rotation(0, -90, 0)
-                                            .translation(-5.5, -6.75, 0)
-                            );
-                }));
+                .addGeckolibItemModel(ItemRegistry.forge_hammer.get(), 32, 32, geckolibModel -> {}))
+                .addGeckolibItemModel(ItemRegistry.forge_hammer_gold.get(), 32, 32, geckolibModel -> {});
         BlockStateGson.Variant variant = new BlockStateGson.Variant().setModel(Ding.id("block/forge_anvil_block"));
 
         generator.addProvider(event.includeClient(), new BlockStatesProvider(packOutput, MODID)

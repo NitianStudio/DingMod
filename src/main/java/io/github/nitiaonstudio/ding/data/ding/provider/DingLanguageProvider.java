@@ -87,7 +87,6 @@ public final class DingLanguageProvider implements DataProvider {
         return CompletableFuture.allOf(futures);
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     private CompletableFuture<?> save(CachedOutput output, Languages lang, ConcurrentHashMap<String, String> language) {
 
         return CompletableFuture.runAsync(() -> {

@@ -11,30 +11,33 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
 
 public class AnvilEvents {
-    @SuppressWarnings("resource")
-    @SubscribeEvent
-    public void onAnvilUpdate(AnvilUpdateEvent event) {//带打磨值的物品皆可修复带耐久的工具
-        ItemStack left = event.getLeft();
-        ItemStack right = event.getRight();
-        if (right.has(ComponentRegistry.forgeAnvilValue) && left.isDamaged()) {
-            int orDefault = right.getOrDefault(ComponentRegistry.forgeAnvilValue, 0);
-            ItemStack copy = left.copy();
-            int damageValue = copy.getDamageValue();
-            int count = right.getCount();
-            while (damageValue > 0 && count > 0) {
-                damageValue-=orDefault / 1000;
-                if (damageValue < 0) {
-                    damageValue = 0;
-                }
-            }
-            copy.setDamageValue(damageValue);
-            event.setOutput(copy);
-            event.setMaterialCost(right.getCount() - count);
-            event.setCost((right.getCount() - count));
-            Player player = event.getPlayer();
-            Level level = player.level();
-            player.hurt(level.damageSources().source(DamageTypes.PLAYER_ATTACK), 1);
-        }
-
-    }
+//    @SubscribeEvent
+//    public void onAnvilUpdate(AnvilUpdateEvent event) {//带打磨值的物品皆可修复带耐久的工具 700锻造值起
+//        ItemStack left = event.getLeft();
+//        ItemStack right = event.getRight();
+//        if (right.has(ComponentRegistry.forgeAnvilValue) && left.isDamaged()) {
+//            int orDefault = right.getOrDefault(ComponentRegistry.forgeAnvilValue, 0);
+//
+//            int count = right.getCount();
+//            int i = orDefault / 700;
+//            if (i == 0) {
+//                return;
+//            }
+//            ItemStack copy = left.copy();
+//            int damageValue = copy.getDamageValue();
+//            int hasCount = damageValue / i;
+//            if (hasCount > count) {
+//                copy.setDamageValue(0);
+//                event.setMaterialCost(count);
+//                event.setCost(count);
+//            } else {
+//                copy.setDamageValue(copy.getDamageValue() - hasCount * i);
+//                event.setMaterialCost(hasCount);
+//                event.setCost(hasCount);
+//            }
+//            event.setOutput(copy);
+//
+//        }
+//
+//    }
 }
