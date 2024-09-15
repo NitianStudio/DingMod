@@ -98,6 +98,10 @@ public class Utils {
         add(rls, "generation/block/forge_anvil_block/", ".png", locations);
     }
 
+    public static void addForgeHammerGeneration(RLSs rls, Map<ResourceLocation, Color[]> locations) {
+        add(rls, "generation/item/forge_hammer/", "png", locations);
+    }
+
     @SuppressWarnings("unused")
     @Deprecated(since = "Using in Date Generation")
     public static void preGeneration(String path) {

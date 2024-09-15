@@ -69,7 +69,28 @@ public class TexturesProvider implements DataProvider {
                         new Color(55, 53, 58, 255),
                         new Color(27, 25, 29, 255),
                 }));
-        
+//        forge_hammer.addForgeHammerGeneration(Map.of(
+//               Ding.id("base"), new Color[]{
+//                        new Color(167, 167, 167, 255),
+//                        new Color(136, 139, 143, 255),
+//                        new Color(78, 80, 83, 255),
+//                        new Color(132, 135, 144, 255),
+//                        new Color(55, 57, 59, 255),
+//                        new Color(37, 39, 41, 255),
+//                        new Color(222, 222, 222, 255),
+//                        new Color(109, 111, 119, 255),
+//                        new Color(105, 109, 120, 255),
+//                        new Color(68, 66, 83, 255),
+//                        new Color(50, 52, 59, 255),
+//                        new Color(95, 98, 104, 255),
+//                        new Color(66, 33, 30, 255),
+//                        new Color(113, 67, 57, 255),
+//                        new Color(82, 80, 86, 255),
+//                        new Color(136, 96, 67, 255),
+//                        new Color(167, 134, 109, 255),
+//
+//                }
+//        ));
 
 
         cmp.copyResources(0, 32, false, true,
@@ -98,11 +119,14 @@ public class TexturesProvider implements DataProvider {
                         NETHER_STAR);
         cmp.copyResources(ItemRegistry.forge_hammer.get(),96, 16, false, true,
                 Ding.id("forge_hammer/base.png"));
+        cmp.copyResources(ItemRegistry.forge_hammer_gold.get(),96, 16, false, true,
+                Ding.id("forge_hammer/gold.png"));
+
 //        cmp.copyResources(new ResourceLocation[] {
 //                Ding.id("forge_hammer/base")
 //        },96, 16, false, true);
 
-//        "/assets/minecraft/textures/item/netherite_ingot.png".preGeneration();
+//        "/assets/ding/textures/item/forge_hammer/gold.png".preGeneration();
 
 
         var tmp = new ConcurrentHashMap<>(cmp);

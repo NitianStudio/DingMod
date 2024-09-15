@@ -15,10 +15,7 @@ import java.util.function.Function;
 @Getter
 public enum RLSs {
     forge_anvil_block(ForgeAnvilBase::new),
-    chestplate(ChestplateBase::new),
-    helmet(HelmetBase::new),
-    leggings(LeggingsBase::new),
-    boots(BootsBase::new)
+    forge_hammer(ForgeHammerBase::new),
     ;
     private final Function<ConcurrentHashMap<ResourceLocation, RBI>, RLS> rls;
 

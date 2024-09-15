@@ -90,6 +90,8 @@ public class ItemTagGeneration extends ItemTagsProvider {
         nugget.add(Items.IRON_NUGGET, Items.GOLD_NUGGET);
         star.add(Items.NETHER_STAR);
         ding.add(ItemRegistry.forge_hammer.get());
+        ding.add(ItemRegistry.forge_hammer_gold.get());
+
 
     }
 
