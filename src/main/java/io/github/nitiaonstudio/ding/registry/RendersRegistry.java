@@ -1,25 +1,16 @@
 package io.github.nitiaonstudio.ding.registry;
 
 import io.github.nitiaonstudio.ding.Ding;
-import io.github.nitiaonstudio.ding.base.geo.molang.ForgeAnvilBlockFunction;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.loading.math.MathParser;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 import java.util.Locale;
 
-public class Renders {
-    public static final String forgeAnvilBlockRotateY = "forge.anvil.block.rotate.y";
-    public static final String forgeAnvilBlockRotateToY ="forge.anvil.block.rotate.to.y";
-    public static final String forgeAnvilBlockMoveX = "forge.anvil.block.move.x";
-    public static final String forgeAnvilBlockMoveToX = "forge.anvil.block.move.to.x";
-    public static final String forgeAnvilBlockMoveZ = "forge.anvil.block.move.z";
-    public static final String forgeAnvilBlockMoveToZ = "forge.anvil.block.move.to.z";
+public class RendersRegistry {
     public static final String id = "geckolib.id";
     public static final GeoBlockRenderer<ForgeAnvilTileEntity> forge_anvil_block_renderer = new GeoBlockRenderer<>(new GeoModel<>() {
 

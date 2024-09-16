@@ -15,3 +15,19 @@
 
 - [点击此处](https://github.com/NitianStudio/DingMod/blob/main/AUTHORS_CHINA.MD)
 - [英文](https://github.com/NitianStudio/DingMod/blob/main/README.md)
+
+## 介绍
+- 锻造值
+  - 锻造值有攻击加成
+  - 挖掘速度加成
+  - 能修任何带耐久的装备
+- 世间万物皆可锻造
+  - 待完善
+- 生产
+  - 拿可锻造的物品右键铁砧可以获取锻造砧(ForgeAnvilBlock)
+  - AB# BA# ##B 配方 B为木棍， A为材料合成锻造锤(ForgeHammer)
+  - 锻造锤右键锻造砧是，锻造砧内有物品则会进行锻造
+  - 锻造值每500会触发雷劫，雷劫有概率损耗锻造砧内的物品
+  - 工具左键锻造砧，锻造砧内的物品附带锻造值/700的数值去修复物品
+  - 空手左键取出物品
+  - 锻造锤锻造值>100会启用修复功能，且30%概率修复自生，修复的值为锻造值/300取余

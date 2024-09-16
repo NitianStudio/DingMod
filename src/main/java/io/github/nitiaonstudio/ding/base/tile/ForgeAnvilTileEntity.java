@@ -35,8 +35,6 @@ import static software.bernie.geckolib.animation.RawAnimation.begin;
 public class ForgeAnvilTileEntity extends BlockEntity implements GeoBlockEntity {
 
     private ItemStack stack = ItemStack.EMPTY;
-    private double rotateY, moveX, moveZ;
-    private double toRotateY, toMoveX, toMoveZ;
     private Modes MODE = Modes.BASE;
     private boolean hold = false;
 
@@ -70,13 +68,6 @@ public class ForgeAnvilTileEntity extends BlockEntity implements GeoBlockEntity 
         if (stack1 != null) {
             ItemStack.parse(registries, stack1).ifPresent(itemStack -> stack = itemStack);
         }
-
-        rotateY = tag.getDouble("rotate_y");
-        toRotateY = tag.getDouble("to_rotate_y");
-        moveX = tag.getDouble("move_x");
-        toMoveX = tag.getDouble("to_move_x");
-        moveZ = tag.getDouble("move_z");
-        toMoveZ = tag.getDouble("to_move_z");
         String mode = tag.getString("mode");
         MODE = mode.isEmpty() ? Modes.BASE : Modes.valueOf(mode);
     }
@@ -103,12 +94,6 @@ public class ForgeAnvilTileEntity extends BlockEntity implements GeoBlockEntity 
         super.saveAdditional(tag, registries);
         if (stack != ItemStack.EMPTY)
             tag.put("anvil_stack", stack.save(registries, tag));
-        tag.putDouble("rotate_y", rotateY);
-        tag.putDouble("to_rotate_y", toRotateY);
-        tag.putDouble("move_x", moveX);
-        tag.putDouble("to_move_x", toMoveX);
-        tag.putDouble("move_z", moveZ);
-        tag.putDouble("to_move_z", toMoveZ);
         tag.putString("mode",MODE.name());
     }
 

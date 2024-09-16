@@ -26,9 +26,9 @@
 			}
 		},
 		"running": {
-			"animation_length": 0.6667,
+			"animation_length": 1,
 			"bones": {
-				"hoe": {
+				"hammer": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]

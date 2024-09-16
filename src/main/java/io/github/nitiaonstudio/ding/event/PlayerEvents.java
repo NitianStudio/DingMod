@@ -3,15 +3,16 @@ package io.github.nitiaonstudio.ding.event;
 import io.github.nitiaonstudio.ding.base.block.ForgeAnvilBlock;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import io.github.nitiaonstudio.ding.registry.BlockRegistry;
-import io.github.nitiaonstudio.ding.registry.ComponentRegistry;
 import io.github.nitiaonstudio.ding.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.projectile.*;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,34 +24,79 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+import static io.github.nitiaonstudio.ding.registry.ComponentRegistry.forgeAnvilValue;
 
 
 public class PlayerEvents {
-
     @SubscribeEvent
     public void attackEntity(LivingDamageEvent.Pre event) {
         DamageContainer container = event.getContainer();
         DamageSource source = container.getSource();
-        if (source.getDirectEntity() instanceof AbstractArrow) {
-            return;
-        }
-
         if (source.getEntity() instanceof LivingEntity livingEntity) {
-            ItemStack stack = livingEntity.getMainHandItem();
+            Entity directEntity = source.getDirectEntity();
+            if (directEntity instanceof Projectile projectile) {
+                switch (projectile) {
+                    case AbstractArrow arrow -> {
+                        if (arrow instanceof ThrownTrident thrownTrident) {
+                            setDamage(thrownTrident.getPickupItemStackOrigin(), container, forgeAnvilValue);
+                        } else {
+                            mainHandOrOffHandIsClass(livingEntity, ProjectileWeaponItem.class, stack ->
+                                    setDamage(stack, container, forgeAnvilValue));
+                        } //三叉戟 光灵箭 箭
+                    }
+                    case AbstractHurtingProjectile hurtingProjectile -> {
 
-            if (stack.has(ComponentRegistry.forgeAnvilValue)) {
-                int orDefault = stack.getOrDefault(ComponentRegistry.forgeAnvilValue, 0);
-                container.addModifier(DamageContainer.Reduction.ABSORPTION, (c, r) -> r + (float) orDefault / 100);
+                        if (hurtingProjectile instanceof ItemSupplier supplier) {//所有带ItemSupplier的都触发
+
+                            setDamage(supplier.getItem(), container, forgeAnvilValue);
+                        }
+                    }
+                    case FishingHook ignored -> mainHandOrOffHandIsClass(livingEntity, FishingRodItem.class, stack -> {
+                        setDamage(stack, container, forgeAnvilValue);
+                    });
+                    case ThrowableProjectile throwableProjectile -> {
+                        if (throwableProjectile instanceof ItemSupplier egg) {
+                            setDamage(egg.getItem(), container, forgeAnvilValue);
+                        }
+                    }
+                    default -> {
+                    }
+                }
+            }
+            else {
+                setDamage(livingEntity.getMainHandItem(), container, forgeAnvilValue);
+
             }
         }
 
     }
 
+    public <T, E extends LivingEntity> void mainHandOrOffHandIsClass(E e, Class<T> tClass, Consumer<ItemStack> consumer) {
+        ItemStack mainHandItem = e.getMainHandItem();
+        ItemStack offhandItem = e.getOffhandItem();
+        if (mainHandItem.getItem().getClass().equals(tClass)) {
+            consumer.accept(mainHandItem);
+        } else if (offhandItem.getItem().getClass().equals(tClass)) {
+            consumer.accept(offhandItem);
+        }
+    }
+
+    public void setDamage(ItemStack stack,
+                              DamageContainer container,
+                              Supplier<DataComponentType<Integer>> supplier) {
+        if (stack.has(supplier)) {
+            int orDefault = stack.getOrDefault(supplier, 0);
+            container.addModifier(DamageContainer.Reduction.ABSORPTION, (c, r) -> r + (float) orDefault / 100);
+        }
+    }
+
     @SubscribeEvent
     public void breakSpeed(PlayerEvent.BreakSpeed event) {
         ItemStack stack = event.getEntity().getMainHandItem();
-        if (stack.has(ComponentRegistry.forgeAnvilValue) && stack.is(TagRegistry.Items.pickaxe.get()))
-            event.setNewSpeed(event.getNewSpeed() + (float) stack.getOrDefault(ComponentRegistry.forgeAnvilValue, 0) / 100);
+        if (stack.has(forgeAnvilValue) && stack.is(TagRegistry.Items.pickaxe.get()))
+            event.setNewSpeed(event.getNewSpeed() + (float) stack.getOrDefault(forgeAnvilValue, 0) / 100);
     }
 
     /*
@@ -70,17 +116,12 @@ public class PlayerEvents {
             }
             player.addItem(stack);
             forgeAnvilTile.setStack(ItemStack.EMPTY);
-            forgeAnvilTile.setMoveX(0);
-            forgeAnvilTile.setToMoveX(0);
-            forgeAnvilTile.setMoveZ(0);
-            forgeAnvilTile.setToMoveZ(0);
-            forgeAnvilTile.setRotateY(0);
-            forgeAnvilTile.setToRotateY(0);
             forgeAnvilTile.setChanged();
 
 
         }
     }
+
     /*
     当方块是铁砧时，放置指定tag组的材料就会变成锻造砧
      */
@@ -110,6 +151,28 @@ public class PlayerEvents {
                 ItemStack copy = offhandItem.copy();
                 copy.setCount(1);
                 setForgeAnvilBlockEntity(level, pos, blockState, offhandItem);
+            }
+        }
+    }
+
+    @SubscribeEvent//左键敲击带锻造值的锻造砧内
+    public void leftForgeAnvilBlockFixTool(PlayerInteractEvent.LeftClickBlock event) {
+        Level level = event.getLevel();
+        BlockPos pos = event.getPos();
+        Player player = event.getEntity();
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof ForgeAnvilTileEntity tile) {
+            ItemStack mainHandItem = player.getMainHandItem();
+            ItemStack stack = tile.getStack();
+            if (stack.has(forgeAnvilValue) && mainHandItem.isDamaged()) {
+                int orDefault = stack.getOrDefault(forgeAnvilValue, 0);
+                int i = orDefault / 700;
+                if (i == 0) return;
+                int damageValue = mainHandItem.getDamageValue() - i;
+                if (damageValue < 0) damageValue = 0;
+                mainHandItem.setDamageValue(damageValue);
+                tile.setStack(ItemStack.EMPTY);
+                tile.setChanged();
             }
         }
     }

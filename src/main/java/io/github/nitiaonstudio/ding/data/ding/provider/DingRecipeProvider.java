@@ -10,6 +10,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.event.entity.player.AnvilRepairEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -30,6 +31,7 @@ public class DingRecipeProvider extends RecipeProvider {
                 .unlockedBy("hasRecipe" + getPath(forgeHammer) + "_" + getPath(A), has(A))
                 .unlockedBy("hasRecipe" + getPath(forgeHammer) + "_" + getPath(B), has(B))
                 .save(recipeOutput);
+
     }
 
     public String getPath(ItemLike item) {

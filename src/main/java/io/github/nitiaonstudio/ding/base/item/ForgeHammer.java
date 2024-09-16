@@ -2,7 +2,6 @@ package io.github.nitiaonstudio.ding.base.item;
 
 import io.github.nitiaonstudio.ding.Ding;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
-import io.github.nitiaonstudio.ding.registry.BlockRegistry;
 import io.github.nitiaonstudio.ding.registry.ComponentRegistry;
 import io.github.nitiaonstudio.ding.registry.SoundRegistry;
 import io.github.nitiaonstudio.ding.registry.TranslateKeyRegistry;
@@ -11,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -19,7 +17,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -27,7 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -37,6 +33,7 @@ import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import static io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity.Raws.rest;
@@ -59,7 +56,7 @@ public class ForgeHammer extends Item implements GeoItem {
 
     public PlayState predicate(AnimationState<ForgeHammer> state) {
         state.getController().setAnimation(state.isMoving() ? begin().thenPlay(running.get()) : begin().thenLoop(rest.get()));
-        state.getController().triggerableAnim("run", begin().thenPlay("running"));
+        state.getController().triggerableAnim("run", begin().thenPlay(running.get()));
 
         return PlayState.CONTINUE;
     }
@@ -118,6 +115,7 @@ public class ForgeHammer extends Item implements GeoItem {
             if (blockEntity instanceof ForgeAnvilTileEntity tileEntity) {
                 ItemStack stack = tileEntity.getStack();
                 DataComponentType<Integer> doubleDataComponentType = ComponentRegistry.forgeAnvilValue.get();
+
                 int orDefault = stack.getOrDefault(doubleDataComponentType, 0);
                 if (orDefault <= 1000000000) {
                     stack.set(doubleDataComponentType, orDefault + 1);
@@ -126,22 +124,26 @@ public class ForgeHammer extends Item implements GeoItem {
                     tileEntity.triggerAnim("ForgeAnvilBlock", "run");
                     int orDefault1 = itemInHand.getOrDefault(doubleDataComponentType, 0);
                     if (orDefault1 >= 100 && itemInHand.getDamageValue() > 0) {//锤子大于等于100的时候启用修复功能, 每300锻造值增加1个修复点
-                        itemInHand.setDamageValue(itemInHand.getDamageValue() - (orDefault1 % 300));
-                    }
-                    if (orDefault % 500 == 499) {
-                        LightningBolt spawn = EntityType.LIGHTNING_BOLT.spawn(serverLevel, clickedPos, MobSpawnType.NATURAL);
-                        if (spawn != null) {
-                            serverLevel.addFreshEntity(spawn);
-                            if (randomSource.nextInt(1, 12) % 3 == 0) {
-                                tileEntity.setStack(ItemStack.EMPTY);
-                                tileEntity.setChanged();
-                            }
+
+                        if (randomSource.nextInt(0, 100) < 30) {
+                            damageValue-=(orDefault1 % 300);
                         }
-
+                        if (stack.isDamaged()) {
+                            int damage1 = stack.getDamageValue() - (orDefault1 % 300);
+                            if (damage1 < 0) damage1 = 0;
+                            stack.setDamageValue(damage1);
+                        }
                     }
-
+                    if (orDefault % 500 == 499)
+                        Optional.ofNullable(EntityType.LIGHTNING_BOLT.spawn(serverLevel, clickedPos, MobSpawnType.NATURAL))
+                                .ifPresent(lightningBolt -> {
+                                    serverLevel.addFreshEntity(lightningBolt);
+                                    if (randomSource.nextInt(1, 12) % 3 == 0) tileEntity.setStack(ItemStack.EMPTY);
+                                });
+                    tileEntity.setChanged();
                     int i = damageValue + 1;
                     itemInHand.setDamageValue(i);
+
                 }
 
             }
