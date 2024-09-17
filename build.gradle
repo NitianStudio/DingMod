@@ -1,3 +1,6 @@
+import de.undercouch.gradle.tasks.download.Download
+import org.graalvm.collections.Pair
+
 import java.nio.file.Files
 import java.util.jar.JarFile
 
@@ -7,6 +10,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.19-beta'
+    id "de.undercouch.download" version "5.6.0"
 }
 
 version = mod_version
@@ -22,6 +26,8 @@ repositories {
         }
     }
     maven {url 'https://libs.azuredoom.com:4443/mods'}
+    maven { url "https://maven.shedaniel.me/" }
+    maven { url = "https://maven.ithundxr.dev/snapshots" }
 }
 
 base {
@@ -120,18 +126,16 @@ dependencies {
     // implementation project(":myproject")
     compileOnly 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    compileOnly fileTree(dir: "libs", includes: ["*.jar"])
+    compileOnly "com.tterrag.registrate:Registrate:MC1.21-1.3.0+53"
+    runtimeOnly fileTree(dir: "libs", includes: ["*.jar"])
+    implementation "me.shedaniel.cloth:cloth-config-neoforge:15.0.130"
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
 
-jar {
 
-    from(project.file("LICENSE"))
-    from(project.file("AUTHORS.MD"))
-    from(project.file("README.md"))
-    exclude 'assets/minecraft'
-}
 
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
@@ -172,6 +176,46 @@ publishing {
     }
 }
 
+def t = tasks.register("downloadAll") {
+
+}
+def i = 0;
+def url = "https://archive.teacon.cn/jiachen/ci/build/"
+def dir = layout.projectDirectory.dir("libs")
+def jars = [
+        "team-anvilcraft/anvilcraft-61.jar"
+]
+def jarV = jars.stream().map {
+
+    def split = it.split("/")
+    def split1 = split[split.length - 1].split("-")
+    return [split[split.length - 1], split1[0]]
+
+}.toList()
+
+jar {
+
+    from(project.file("LICENSE"))
+    from(project.file("AUTHORS.MD"))
+    from(project.file("README.md"))
+    jarV.forEach {
+        exclude "assets/${it[1]}"
+    }
+    exclude 'assets/minecraft'
+}
+
+jars.forEach { b->
+
+    def register = tasks.register("Download" + i, Download) {
+        src(url + b)
+
+
+        dest(dir)
+    }
+    i++
+    t.get().dependsOn(register.get())
+}
+
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
 idea {
@@ -184,17 +228,29 @@ idea {
 List<String> keys = ["item"]
 boolean isCompulsion = false
 
+
+
 tasks.register("copyResources") {
-    def jarFile = layout.buildDirectory.dir("moddev").get().dir("artifacts").file("neoforge-${neo_version}-minecraft-resources-aka-client-extra.jar")
-    def mcAssets = layout.projectDirectory.dir("src").dir("main").dir("resources").dir("assets").dir("minecraft").getAsFile().toPath()
+    func(layout.buildDirectory.dir("moddev").get().dir("artifacts").file("neoforge-${neo_version}-minecraft-resources-aka-client-extra.jar").asFile, "minecraft", isCompulsion, keys)
+    jarV.forEach {
+
+        def kv = it
+        func(file("libs/${kv.get(0)}"), kv.get(1), isCompulsion, keys)
+    }
+
+
+}
+
+def func(File jarFile, String modid, boolean isCompulsion,List<String> keys) {
+    def mcAssets = layout.projectDirectory.dir("src").dir("main").dir("resources").dir("assets").dir(modid).getAsFile().toPath()
     if (Files.notExists(mcAssets) || isCompulsion) {
-        JarFile jf = new JarFile(jarFile.asFile)
+        JarFile jf = new JarFile(jarFile)
         def entries = jf.entries()
         while (entries.hasMoreElements()) {
             def entry = entries.nextElement()
-            if (entry.name.startsWith("assets/minecraft/textures/")) {
+            if (entry.name.startsWith("assets/${modid}/textures/")) {
                 for (final def key in keys ) {
-                    def newName = entry.name.replace("assets/minecraft/textures/", "")
+                    def newName = entry.name.replace("assets/${modid}/textures/", "")
                     if(newName.startsWith("${key}/")) {
                         newName = newName.replace("${key}/", "")
 

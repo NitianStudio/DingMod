@@ -117,24 +117,24 @@ public class ForgeHammer extends Item implements GeoItem {
                 DataComponentType<Integer> doubleDataComponentType = ComponentRegistry.forgeAnvilValue.get();
 
                 int orDefault = stack.getOrDefault(doubleDataComponentType, 0);
-                if (orDefault <= 1000000000) {
+                if (orDefault <= Ding.dingConfig.get().base.max_forge_anvil_value) {
                     stack.set(doubleDataComponentType, orDefault + 1);
 
                     serverLevel.playSound(null, clickedPos, SoundRegistry.ding.get(), SoundSource.VOICE, 1F, 1.0F);
                     tileEntity.triggerAnim("ForgeAnvilBlock", "run");
                     int orDefault1 = itemInHand.getOrDefault(doubleDataComponentType, 0);
-                    if (orDefault1 >= 100 && itemInHand.getDamageValue() > 0) {//锤子大于等于100的时候启用修复功能, 每300锻造值增加1个修复点
+                    if (orDefault1 >= Ding.dingConfig.get().base.min_fix_in_forge_anvil_block && itemInHand.getDamageValue() > 0) {//锤子大于等于100的时候启用修复功能, 每300锻造值增加1个修复点
 
-                        if (randomSource.nextInt(0, 100) < 30) {
-                            damageValue-=(orDefault1 % 300);
+                        if (randomSource.nextInt(0, 100) < Ding.dingConfig.get().base.min_fix_self_in_forge_anvil_block) {
+                            damageValue-=(orDefault1 % Ding.dingConfig.get().base.fix_in_forge_anvil_block_mod_factor);
                         }
                         if (stack.isDamaged()) {
-                            int damage1 = stack.getDamageValue() - (orDefault1 % 300);
+                            int damage1 = stack.getDamageValue() - (orDefault1 % Ding.dingConfig.get().base.fix_in_forge_anvil_block_mod_factor);
                             if (damage1 < 0) damage1 = 0;
                             stack.setDamageValue(damage1);
                         }
                     }
-                    if (orDefault % 500 == 499)
+                    if (orDefault % Ding.dingConfig.get().base.thunderstorm_factor == Ding.dingConfig.get().base.thunderstorm_factor - 1)
                         Optional.ofNullable(EntityType.LIGHTNING_BOLT.spawn(serverLevel, clickedPos, MobSpawnType.NATURAL))
                                 .ifPresent(lightningBolt -> {
                                     serverLevel.addFreshEntity(lightningBolt);

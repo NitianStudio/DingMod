@@ -342,6 +342,30 @@
 							"vector": [0, 0, 0]
 						}
 					}
+				},
+				"magnet": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": ["math.random_integer(-1, 1)", "math.random_integer(-10, 10)", "math.random_integer(-1, 1)"]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 0.6, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
 				}
 			}
 		}

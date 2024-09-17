@@ -10,13 +10,11 @@ import io.github.nitiaonstudio.ding.data.resources.Utils;
 import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import lombok.Getter;
 import lombok.experimental.ExtensionMethod;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
-import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -121,6 +119,16 @@ public class TexturesProvider implements DataProvider {
                 Ding.id("forge_hammer/base.png"));
         cmp.copyResources(ItemRegistry.forge_hammer_gold.get(),96, 16, false, true,
                 Ding.id("forge_hammer/gold.png"));
+//        if (ModList.get().getModFileById("anvilcraft") != null) {
+//            TextureData.apply(cmp);
+//        }
+//        Ding.loadRunLinkage("anvilcraft",
+//                false,
+//                null,
+//                "io.github.nitiaonstudio.ding.anvilcraft.data.TextureData",
+//                "apply",
+//                cmp);
+
 
 //        cmp.copyResources(new ResourceLocation[] {
 //                Ding.id("forge_hammer/base")

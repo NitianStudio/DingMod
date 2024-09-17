@@ -1,8 +1,19 @@
 {
-  "block.ding.forge_anvil_block": "forge anvil block",
+  "text.autoconfig.ding.option.base.min_fix_self_in_forge_anvil_block": "min fix in fab random",
+  "text.autoconfig.ding.option.base.attack_factor": "attack factor",
   "item.ding.forge_hammer_gold": "forge hammer[gold]",
+  "text.autoconfig.ding.option.base.fix_in_forge_anvil_block_mod_factor": "fix in fab factor",
   "ding.mod.destroyed": "[destroyed] ",
-  "sound.ding.ding": "ding~ding",
+  "text.autoconfig.ding.option.linkage.magnet_radius": "magnet radius factor",
   "item.ding.forge_hammer": "forge hammer",
-  "ding.mod.forge.anvil.value": "Forge Anvil Value: "
+  "text.autoconfig.ding.option.base.min_fix_in_forge_anvil_block": "min fix in fab value",
+  "text.autoconfig.ding.option.linkage": "linkage",
+  "block.ding.forge_anvil_block": "forge anvil block",
+  "text.autoconfig.ding.option.base.thunderstorm_factor": "thunderstorm factor",
+  "sound.ding.ding": "ding~ding",
+  "text.autoconfig.ding.option.base.fix_all_factor": "fix factor",
+  "text.autoconfig.ding.option.base.mine_speed_factor": "mine speed factor",
+  "text.autoconfig.ding.option.base": "base",
+  "ding.mod.forge.anvil.value": "Forge Anvil Value: ",
+  "text.autoconfig.ding.option.base.max_forge_anvil_value": "max forge anvil value"
 }

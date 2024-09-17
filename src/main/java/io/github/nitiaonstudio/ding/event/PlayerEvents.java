@@ -1,5 +1,6 @@
 package io.github.nitiaonstudio.ding.event;
 
+import io.github.nitiaonstudio.ding.Ding;
 import io.github.nitiaonstudio.ding.base.block.ForgeAnvilBlock;
 import io.github.nitiaonstudio.ding.base.tile.ForgeAnvilTileEntity;
 import io.github.nitiaonstudio.ding.registry.BlockRegistry;
@@ -88,7 +89,7 @@ public class PlayerEvents {
                               Supplier<DataComponentType<Integer>> supplier) {
         if (stack.has(supplier)) {
             int orDefault = stack.getOrDefault(supplier, 0);
-            container.addModifier(DamageContainer.Reduction.ABSORPTION, (c, r) -> r + (float) orDefault / 100);
+            container.addModifier(DamageContainer.Reduction.ABSORPTION, (c, r) -> r + (float) orDefault / Ding.dingConfig.get().base.attack_factor);
         }
     }
 
@@ -96,7 +97,7 @@ public class PlayerEvents {
     public void breakSpeed(PlayerEvent.BreakSpeed event) {
         ItemStack stack = event.getEntity().getMainHandItem();
         if (stack.has(forgeAnvilValue) && stack.is(TagRegistry.Items.pickaxe.get()))
-            event.setNewSpeed(event.getNewSpeed() + (float) stack.getOrDefault(forgeAnvilValue, 0) / 100);
+            event.setNewSpeed(event.getNewSpeed() + (float) stack.getOrDefault(forgeAnvilValue, 0) / Ding.dingConfig.get().base.mine_speed_factor);
     }
 
     /*
@@ -155,7 +156,7 @@ public class PlayerEvents {
         }
     }
 
-    @SubscribeEvent//左键敲击带锻造值的锻造砧内
+    @SubscribeEvent//左键敲击带锻造值的锻造砧内物品消耗修复工具
     public void leftForgeAnvilBlockFixTool(PlayerInteractEvent.LeftClickBlock event) {
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
@@ -166,7 +167,7 @@ public class PlayerEvents {
             ItemStack stack = tile.getStack();
             if (stack.has(forgeAnvilValue) && mainHandItem.isDamaged()) {
                 int orDefault = stack.getOrDefault(forgeAnvilValue, 0);
-                int i = orDefault / 700;
+                int i = orDefault / Ding.dingConfig.get().base.fix_all_factor;
                 if (i == 0) return;
                 int damageValue = mainHandItem.getDamageValue() - i;
                 if (damageValue < 0) damageValue = 0;

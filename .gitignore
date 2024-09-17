@@ -7,10 +7,12 @@
 **/.idea/
 
 **/minecraft/textures
+**/anvilcraft/textures
 
 runs/
 run/
 MagicaVoxel**/
+libs/
 
 # Ignore Gradle GUI config
 gradle-app.setting

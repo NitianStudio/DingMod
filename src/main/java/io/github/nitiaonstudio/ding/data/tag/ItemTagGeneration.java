@@ -1,5 +1,6 @@
 package io.github.nitiaonstudio.ding.data.tag;
 
+import dev.dubhe.anvilcraft.init.ModItems;
 import io.github.nitiaonstudio.ding.data.FunctionIII;
 import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import io.github.nitiaonstudio.ding.registry.TagRegistry;
@@ -48,6 +49,7 @@ public class ItemTagGeneration extends ItemTagsProvider {
         IntrinsicTagAppender<Item> body = tag(TagRegistry.Items.body.get());
         IntrinsicTagAppender<Item> nugget = tag(TagRegistry.Items.nugget.get());
         IntrinsicTagAppender<Item> star = tag(TagRegistry.Items.star.get());
+        IntrinsicTagAppender<Item> linkage = tag(TagRegistry.Items.linkage.get());
 
         ingot.add(
                 Items.IRON_INGOT,
@@ -91,6 +93,9 @@ public class ItemTagGeneration extends ItemTagsProvider {
         star.add(Items.NETHER_STAR);
         ding.add(ItemRegistry.forge_hammer.get());
         ding.add(ItemRegistry.forge_hammer_gold.get());
+        linkage.add(
+                ModItems.MAGNET.get()
+        );
 
 
     }
