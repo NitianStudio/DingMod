@@ -14,6 +14,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.common.NeoForge;
 
 import static io.github.nitiaonstudio.ding.Ding.LOGGER;
 import static io.github.nitiaonstudio.ding.Ding.MODID;
@@ -26,6 +27,8 @@ public class DingClient {
                 IConfigScreenFactory.class,
                 (c, s) -> AutoConfig.getConfigScreen(DingConfig.class, s).get()
         );
+        modBus.addListener(DingClient::onClientSetup);
+        modBus.addListener(DingClient::registerRenderers);
     }
 
 

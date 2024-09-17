@@ -2,6 +2,7 @@ package io.github.nitiaonstudio.ding;
 
 import com.mojang.logging.LogUtils;
 import io.github.nitiaonstudio.ding.config.DingConfig;
+import io.github.nitiaonstudio.ding.event.CraftEvent;
 import io.github.nitiaonstudio.ding.event.PlayerEvents;
 import io.github.nitiaonstudio.ding.registry.AllRegistry;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -37,6 +38,7 @@ public class Ding {
         AllRegistry.registerAll(modEventBus);
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(new PlayerEvents());
+        NeoForge.EVENT_BUS.register(new CraftEvent());
 //        NeoForge.EVENT_BUS.register(new AnvilEvents()); 无法实现
     }
 
