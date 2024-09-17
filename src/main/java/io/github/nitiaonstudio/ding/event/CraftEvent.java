@@ -22,6 +22,7 @@ public class CraftEvent {
         }
         if (forgeAnvilValueNew >= 0) {
             forgeAnvilValueNew += crafting.getOrDefault(forgeAnvilValue, 0);
+            forgeAnvilValueNew/=crafting.getCount();
             crafting.set(forgeAnvilValue, forgeAnvilValueNew);
         }
     }
