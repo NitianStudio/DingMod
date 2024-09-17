@@ -1,9 +1,11 @@
 {
+  "ding.merge.cobble.stone": "超越自然的伟力",
   "text.autoconfig.ding.option.base.min_fix_self_in_forge_anvil_block": "锻造时自我修复概率",
   "text.autoconfig.ding.option.base.attack_factor": "攻击系数",
   "item.ding.forge_hammer_gold": "锻造锤【金】",
   "text.autoconfig.ding.option.base.fix_in_forge_anvil_block_mod_factor": "锻造砧内修理系数",
   "ding.mod.destroyed": "【已损坏】 ",
+  "ding.merge.cobble.stone.desc": "噢我的上帝，这不可能实现的",
   "text.autoconfig.ding.option.linkage.magnet_radius": "磁力增强半径系数",
   "item.ding.forge_hammer": "锻造锤",
   "text.autoconfig.ding.option.base.min_fix_in_forge_anvil_block": "锻造砧内最小修理值",
