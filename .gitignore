@@ -12,7 +12,6 @@
 runs/
 run/
 MagicaVoxel**/
-libs/
 
 # Ignore Gradle GUI config
 gradle-app.setting
