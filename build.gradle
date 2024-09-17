@@ -1,5 +1,5 @@
 import de.undercouch.gradle.tasks.download.Download
-import org.graalvm.collections.Pair
+
 
 import java.nio.file.Files
 import java.util.jar.JarFile
@@ -183,7 +183,7 @@ def i = 0;
 def url = "https://archive.teacon.cn/jiachen/ci/build/"
 def dir = layout.projectDirectory.dir("libs")
 def jars = [
-        "team-anvilcraft/anvilcraft-61.jar"
+        "team-anvilcraft/anvilcraft-66.jar"
 ]
 def jarV = jars.stream().map {
 
@@ -198,9 +198,9 @@ jar {
     from(project.file("LICENSE"))
     from(project.file("AUTHORS.MD"))
     from(project.file("README.md"))
-    jarV.forEach {
-        exclude "assets/${it[1]}"
-    }
+//    jarV.forEach {
+//        exclude "assets/${it[1]}"
+//    }
     exclude 'assets/minecraft'
 }
 
@@ -232,11 +232,11 @@ boolean isCompulsion = false
 
 tasks.register("copyResources") {
     func(layout.buildDirectory.dir("moddev").get().dir("artifacts").file("neoforge-${neo_version}-minecraft-resources-aka-client-extra.jar").asFile, "minecraft", isCompulsion, keys)
-    jarV.forEach {
-
-        def kv = it
-        func(file("libs/${kv.get(0)}"), kv.get(1), isCompulsion, keys)
-    }
+//    jarV.forEach {
+//
+//        def kv = it
+//        func(file("libs/${kv.get(0)}"), kv.get(1), isCompulsion, keys)
+//    }
 
 
 }
