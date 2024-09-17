@@ -12,7 +12,8 @@ public class ComponentRegistry {
             .persistent(INT).networkSynchronized(ByteBufCodecs.INT));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> cd = components.registerComponentType("cd", builder -> builder
             .persistent(INT).networkSynchronized(ByteBufCodecs.INT));
-
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> compression = components.registerComponentType("compression", builder -> builder
+            .persistent(STRING).networkSynchronized(ByteBufCodecs.STRING_UTF8));
     public static void registry() {
 
     }

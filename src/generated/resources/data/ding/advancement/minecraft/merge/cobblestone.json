@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "craft": {
+      "conditions": {
+        "components": "ding:compression",
+        "recipe_id": "ding:minecraft/merge/cobblestone"
+      },
+      "trigger": "ding:component_geted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "ding.merge.cobble.stone.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:cobblestone"
+    },
+    "title": {
+      "translate": "ding.merge.cobble.stone"
+    }
+  },
+  "requirements": [
+    [
+      "craft"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

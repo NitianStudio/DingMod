@@ -1,5 +1,11 @@
 {
   "values": [
-    "anvilcraft:magnet"
+    "anvilcraft:magnet",
+    "anvilcraft:tungsten_ingot",
+    "anvilcraft:cursed_gold_ingot",
+    "anvilcraft:royal_steel_ingot",
+    "anvilcraft:titanium_ingot",
+    "anvilcraft:zinc_ingot",
+    "anvilcraft:lead_ingot"
   ]
 }

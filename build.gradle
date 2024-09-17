@@ -183,7 +183,7 @@ def i = 0;
 def url = "https://archive.teacon.cn/jiachen/ci/build/"
 def dir = layout.projectDirectory.dir("libs")
 def jars = [
-        "team-anvilcraft/anvilcraft-66.jar"
+        "team-anvilcraft/anvilcraft-69.jar"
 ]
 def jarV = jars.stream().map {
 

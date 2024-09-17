@@ -12,17 +12,14 @@ import io.github.nitiaonstudio.ding.registry.BlockRegistry;
 import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import io.github.nitiaonstudio.ding.registry.SoundRegistry;
 import io.github.nitiaonstudio.ding.registry.TranslateKeyRegistry;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.List;
@@ -49,6 +46,8 @@ public class DingData {
                 .add(ItemRegistry.forge_hammer, "forge hammer")
                 .add(ItemRegistry.forge_hammer_gold, "forge hammer[gold]")
                 .add(TranslateKeyRegistry.forgeAnvilValue, "Forge Anvil Value: ")
+                .add(TranslateKeyRegistry.mergeCobbleStone, "Surpassing the power of nature")
+                .add(TranslateKeyRegistry.mergeCobbleStoneDesc, "Oh my God, this is not gonna happen")
                 .add(TranslateKeyRegistry.destroyed, "[destroyed] ")
                 .add("text.autoconfig.ding.option.linkage", "linkage")
                 .add("text.autoconfig.ding.option.linkage.magnet_radius", "magnet radius factor")
@@ -68,6 +67,8 @@ public class DingData {
                 .add(ItemRegistry.forge_hammer, "锻造锤")
                 .add(ItemRegistry.forge_hammer_gold, "锻造锤【金】")
                 .add(TranslateKeyRegistry.forgeAnvilValue, "锻造数：")
+                .add(TranslateKeyRegistry.mergeCobbleStone, "超越自然的伟力")
+                .add(TranslateKeyRegistry.mergeCobbleStoneDesc, "噢我的上帝，这不可能实现的")
                 .add(TranslateKeyRegistry.destroyed, "【已损坏】 ")
                 .add("text.autoconfig.ding.option.linkage", "联动")
                 .add("text.autoconfig.ding.option.linkage.magnet_radius", "磁力增强半径系数")
@@ -101,6 +102,6 @@ public class DingData {
         generator.addProvider(event.includeServer(), new ItemTagGeneration(packOutput, lookupProvider, existingFileHelper, blocks));
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Set.of(),
                 List.of(new LootTableProvider.SubProviderEntry(BlockLootGeneration::new, LootContextParamSets.BLOCK)), lookupProvider));
-
+        generator.addProvider(event.includeServer(), new DingAdvancementGeneration(packOutput, lookupProvider, existingFileHelper));
     }
 }

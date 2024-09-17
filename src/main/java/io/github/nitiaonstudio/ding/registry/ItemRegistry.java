@@ -9,6 +9,7 @@ import static io.github.nitiaonstudio.ding.registry.AllRegistry.items;
 public class ItemRegistry {
     public static final DeferredItem<ForgeHammer> forge_hammer = items.registerItem("forge_hammer", properties -> new ForgeHammer(properties.durability(20), "base", 100));
     public static final DeferredItem<ForgeHammer> forge_hammer_gold = items.registerItem("forge_hammer_gold", properties -> new ForgeHammer(properties.durability(40), "gold", 70));
+    public static final DeferredItem<ForgeHammer> forge_hammer_copper = items.registerItem("forge_hammer_copper", properties -> new ForgeHammer(properties.durability(80), "copper", 70));
     public static void registry() {
 
     }

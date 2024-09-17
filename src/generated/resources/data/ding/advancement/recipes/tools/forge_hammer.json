@@ -1,7 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "hasRecipeforge_hammer_iron_ingot": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ding:forge_hammer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasforge_hammer_iron_ingot": {
       "conditions": {
         "items": [
           {
@@ -11,7 +17,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "hasRecipeforge_hammer_stick": {
+    "hasforge_hammer_stick": {
       "conditions": {
         "items": [
           {
@@ -20,19 +26,13 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "ding:forge_hammer"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "hasRecipeforge_hammer_iron_ingot",
-      "hasRecipeforge_hammer_stick"
+      "hasforge_hammer_iron_ingot",
+      "hasforge_hammer_stick"
     ]
   ],
   "rewards": {

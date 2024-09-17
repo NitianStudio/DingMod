@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import static io.github.nitiaonstudio.ding.registry.ComponentRegistry.forgeAnvilValue;
 
 @Pseudo
-@Mixin(targets = "dev.dubhe.anvilcraft.item.MagnetItem")
+@Mixin(targets = "dev.dubhe.anvilcraft.item.MagnetItem", remap = false)
 @Debug(export = true)
 public class MagnetMixin {
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/AABB;<init>(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)V"), locals = LocalCapture.CAPTURE_FAILEXCEPTION)

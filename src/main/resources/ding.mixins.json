@@ -5,8 +5,10 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "ding.refmap.json",
   "mixins": [
+    "ItemMixin",
     "MagnetMixin",
-    "ToolTipAddAll"
+    "block.CraftBlockMixin",
+    "player.ServerPlayerMixin"
   ],
   "client": [
   ],

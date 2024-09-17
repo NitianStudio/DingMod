@@ -91,10 +91,19 @@ public class ItemTagGeneration extends ItemTagsProvider {
 
         nugget.add(Items.IRON_NUGGET, Items.GOLD_NUGGET);
         star.add(Items.NETHER_STAR);
-        ding.add(ItemRegistry.forge_hammer.get());
-        ding.add(ItemRegistry.forge_hammer_gold.get());
+        ding.add(
+                ItemRegistry.forge_hammer.get(),
+                ItemRegistry.forge_hammer_gold.get(),
+                ItemRegistry.forge_hammer_copper.get()
+        );
         linkage.add(
-                ModItems.MAGNET.get()
+                ModItems.MAGNET.get(),
+                ModItems.TUNGSTEN_INGOT.get(),
+                ModItems.CURSED_GOLD_INGOT.get(),
+                ModItems.ROYAL_STEEL_INGOT.get(),
+                ModItems.TITANIUM_INGOT.get(),
+                ModItems.ZINC_INGOT.get(),
+                ModItems.LEAD_INGOT.get()
         );
 
 
