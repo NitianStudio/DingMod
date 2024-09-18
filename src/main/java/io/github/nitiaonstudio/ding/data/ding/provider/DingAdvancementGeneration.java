@@ -1,27 +1,20 @@
 package io.github.nitiaonstudio.ding.data.ding.provider;
 
 import io.github.nitiaonstudio.ding.Ding;
-import io.github.nitiaonstudio.ding.advancements.CraftedComponentGetTrigger;
-import io.github.nitiaonstudio.ding.registry.ComponentRegistry;
+import io.github.nitiaonstudio.ding.registry.ItemRegistry;
 import io.github.nitiaonstudio.ding.registry.TranslateKeyRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.RecipeCraftedTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.data.PackOutput;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-
-import static io.github.nitiaonstudio.ding.data.ding.provider.DingRecipeProvider.getPath;
 
 public class DingAdvancementGeneration extends AdvancementProvider {
     /**
@@ -38,7 +31,17 @@ public class DingAdvancementGeneration extends AdvancementProvider {
                     .advancement()
                     .addCriterion("inventory", InventoryChangeTrigger.TriggerInstance.hasItems(
                             ItemPredicate.Builder.item().hasComponents(DataComponentPredicate.builder().build()).build()
-                    )).save(s, Ding.id("minecraft/amaze"), e);
+                    ))
+                    .display(
+                            ItemRegistry.forge_hammer.get(),
+                            TranslateKeyRegistry.amaze,
+                            TranslateKeyRegistry.amazeDesc,
+                            null,
+                            AdvancementType.GOAL,
+                            true,
+                            true,
+                            false
+                    ).save(s, Ding.id("minecraft/amaze"), e);
 //            Advancement.Builder
 //                    .advancement()
 //                    .addCriterion("craft",
