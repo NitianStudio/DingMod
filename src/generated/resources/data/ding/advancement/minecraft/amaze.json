@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "inventory": {
+      "conditions": {
+        "items": [
+          {}
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "inventory"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
