@@ -10,6 +10,7 @@
   "item.ding.forge_hammer": "forge hammer",
   "text.autoconfig.ding.option.base.min_fix_in_forge_anvil_block": "min fix in fab value",
   "text.autoconfig.ding.option.linkage": "linkage",
+  "item.ding.forge_hammer_copper": "forge hammer[copper]",
   "block.ding.forge_anvil_block": "forge anvil block",
   "text.autoconfig.ding.option.base.thunderstorm_factor": "thunderstorm factor",
   "sound.ding.ding": "ding~ding",

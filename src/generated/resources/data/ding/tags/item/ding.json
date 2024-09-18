@@ -2,6 +2,8 @@
   "values": [
     "ding:forge_hammer",
     "ding:forge_hammer_gold",
-    "ding:forge_hammer_copper"
+    "ding:forge_hammer_copper",
+    "ding:forge_hammer_diamond",
+    "ding:forge_hammer_netherite"
   ]
 }

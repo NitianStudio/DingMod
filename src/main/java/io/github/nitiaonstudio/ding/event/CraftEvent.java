@@ -6,8 +6,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-import java.math.BigInteger;
-
 import static io.github.nitiaonstudio.ding.registry.ComponentRegistry.compression;
 import static io.github.nitiaonstudio.ding.registry.ComponentRegistry.forgeAnvilValue;
 
@@ -30,44 +28,6 @@ public class CraftEvent {
 
             crafting.set(forgeAnvilValue, forgeAnvilValueNew);
         }
-    }
-
-    @SubscribeEvent
-    public void craftEventOfCompression(PlayerEvent.ItemCraftedEvent event) {
-        ItemStack crafting = event.getCrafting();
-        Container inventory = event.getInventory();
-        boolean b = true;
-        String compressionValue = null;
-        int count = 0;
-        for (int i = 0; i < inventory.getContainerSize(); i++) {
-            ItemStack item = inventory.getItem(i);
-            if (!item.has(compression)) {
-                b = false;
-                break;
-            } else {
-                String orDefault = item.getOrDefault(compression, "0");
-                if (compressionValue == null) {
-                    compressionValue = orDefault;
-                } else if (compressionValue.equals(orDefault)) {
-                    b = false;
-                    break;
-                } else if (!crafting.is(item.getItem())) {
-                    b = false;
-                    break;
-                }
-                count++;
-            }
-
-        }
-        if (b && compressionValue != null) {
-            BigInteger bigInteger = new BigInteger(compressionValue);
-            if (count == 9) {
-                crafting.set(compression, bigInteger.add(BigInteger.ONE).toString());
-            } else {
-                crafting.set(compression, bigInteger.subtract(BigInteger.ONE).toString());
-            }
-        }
-
     }
 
     public int checkAdd(int k, int v) {

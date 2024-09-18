@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ding:minecraft/cobblestone"
+        "recipe": "ding:updata_netherite_forge_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "hascobblestone": {
+    "key": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:cobblestone"
+            "items": "minecraft:netherite_upgrade_smithing_template"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "hascobblestone"
+      "key"
     ]
   ],
   "rewards": {
     "recipes": [
-      "ding:minecraft/cobblestone"
+      "ding:updata_netherite_forge_hammer"
     ]
   }
 }

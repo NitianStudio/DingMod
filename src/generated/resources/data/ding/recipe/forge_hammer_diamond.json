@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "minecraft:diamond"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "BA ",
+    "AB ",
+    "  B"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ding:forge_hammer_diamond"
+  }
+}

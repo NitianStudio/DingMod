@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ding:forge_hammer_diamond"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasforge_hammer_diamond_diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "hasforge_hammer_diamond_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "hasforge_hammer_diamond_diamond",
+      "hasforge_hammer_diamond_stick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ding:forge_hammer_diamond"
+    ]
+  }
+}

@@ -94,7 +94,9 @@ public class ItemTagGeneration extends ItemTagsProvider {
         ding.add(
                 ItemRegistry.forge_hammer.get(),
                 ItemRegistry.forge_hammer_gold.get(),
-                ItemRegistry.forge_hammer_copper.get()
+                ItemRegistry.forge_hammer_copper.get(),
+                ItemRegistry.forge_hammer_diamond.get(),
+                ItemRegistry.forge_hammer_netherite.get()
         );
         linkage.add(
                 ModItems.MAGNET.get(),
