@@ -9,6 +9,19 @@
       "trigger": "minecraft:inventory_changed"
     }
   },
+  "display": {
+    "description": {
+      "translate": "ding.amaze.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "ding:forge_hammer"
+    },
+    "title": {
+      "translate": "ding.amaze"
+    }
+  },
   "requirements": [
     [
       "inventory"
