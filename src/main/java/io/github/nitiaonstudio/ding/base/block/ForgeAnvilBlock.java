@@ -95,6 +95,11 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
+    public static final VoxelShape makeNorth = makeNorth();
+    public static final VoxelShape makeEast = makeEast();
+    public static final VoxelShape makeSouth = makeSouth();
+    public static final VoxelShape makeShape = makeShape();
+
     @Override
     @NotNull
     protected VoxelShape getShape(BlockState state,
@@ -102,10 +107,10 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
                                   @NotNull BlockPos pos,
                                   @NotNull CollisionContext context) {
         return switch (state.getValue(FACING)) {
-            case NORTH -> makeNorth();
-            case EAST -> makeEast();
-            case SOUTH -> makeSouth();
-            default -> makeShape();
+            case NORTH -> makeNorth;
+            case EAST -> makeEast;
+            case SOUTH -> makeSouth;
+            default -> makeShape;
         };
     }
 
@@ -120,7 +125,7 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
         return entity.damageSources().anvil(entity);
     }
 
-    public VoxelShape makeShape(){
+    public static VoxelShape makeShape(){
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(0.30776261965716256, 0.5153676784340807, 0.5573681312948406, 0.7367626196571626, 0.7566801784340806, 1.737118131294841), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0.3129106196571626, 0.05955517843408059, 0.4604141312948406, 0.7316146196571627, 0.7030551784340807, 0.7718681312948407), BooleanOp.OR);
@@ -136,7 +141,7 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
         return shape;
     }
 
-    public VoxelShape makeSouth(){
+    public static VoxelShape makeSouth(){
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(0.5423828143143252, 0.5153676784340807, 0.327595636637678, 1.7221328143143257, 0.7566801784340806, 0.756595636637678), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0.4454288143143253, 0.05955517843408059, 0.3327436366376779, 0.7568828143143254, 0.7030551784340807, 0.7514476366376779), BooleanOp.OR);
@@ -152,7 +157,7 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
         return shape;
     }
 
-    public VoxelShape makeEast(){
+    public static VoxelShape makeEast(){
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(0.3126103196571627, 0.5153676784340807, -0.6577745580194851, 0.7416103196571626, 0.7566801784340806, 0.5219754419805153), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0.3177583196571626, 0.05955517843408059, 0.30747544198051524, 0.7364623196571626, 0.7030551784340807, 0.6189294419805152), BooleanOp.OR);
@@ -168,7 +173,7 @@ public class ForgeAnvilBlock extends FallingBlock implements EntityBlock {
         return shape;
     }
 
-    public VoxelShape makeNorth(){
+    public static VoxelShape makeNorth(){
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(-0.6727598750000003, 0.5153676784340807, 0.3227479366376779, 0.506990125, 0.7566801784340806, 0.7517479366376779), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0.29249012499999993, 0.05955517843408059, 0.3278959366376779, 0.6039441249999999, 0.7030551784340807, 0.746599936637678), BooleanOp.OR);
