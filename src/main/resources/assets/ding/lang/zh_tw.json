@@ -1,0 +1,22 @@
+{
+  "text.autoconfig.ding.option.base.min_fix_self_in_forge_anvil_block": "鍛造時自我修復機率",
+  "text.autoconfig.ding.option.base.attack_factor": "攻擊係數",
+  "item.ding.forge_hammer_gold": "鍛造錘【金】",
+  "text.autoconfig.ding.option.base.fix_in_forge_anvil_block_mod_factor": "鍛造砧內修理係數",
+  "ding.mod.destroyed": "【已損壞】 ",
+  "text.autoconfig.ding.option.linkage.magnet_radius": "磁力增強半徑係數",
+  "item.ding.forge_hammer": "鍛造錘",
+  "text.autoconfig.ding.option.base.min_fix_in_forge_anvil_block": "鍛造砧內最小修理值",
+  "text.autoconfig.ding.option.linkage": "同步",
+  "item.ding.forge_hammer_copper": "鍛造錘【銅】",
+  "ding.amaze.desc": "噢我的上帝，這不可能實現的",
+  "block.ding.forge_anvil_block": "鍛造砧",
+  "text.autoconfig.ding.option.base.thunderstorm_factor": "渡劫比例",
+  "sound.ding.ding": "叮～叮",
+  "text.autoconfig.ding.option.base.fix_all_factor": "修復係數",
+  "text.autoconfig.ding.option.base.mine_speed_factor": "挖掘係數",
+  "ding.amaze": "超越自然的偉力",
+  "text.autoconfig.ding.option.base": "基礎",
+  "ding.mod.forge.anvil.value": "鍛造數：",
+  "text.autoconfig.ding.option.base.max_forge_anvil_value": "最大鍛造值"
+}
