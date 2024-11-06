@@ -16,6 +16,7 @@ import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AnvilBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -132,7 +133,7 @@ public class PlayerEvents {
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
         BlockState blockState = level.getBlockState(pos);
-        if (blockState.getBlock() instanceof AnvilBlock) {
+        if (blockState.is(TagRegistry.Blocks.anvil.get())) {
             ItemStack mainHandItem = player.getMainHandItem();
             ItemStack offhandItem = player.getOffhandItem();
             if (mainHandItem.isEmpty() && offhandItem.isEmpty()) return;

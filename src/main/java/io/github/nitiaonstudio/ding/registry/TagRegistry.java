@@ -1,9 +1,12 @@
 package io.github.nitiaonstudio.ding.registry;
 
 import io.github.nitiaonstudio.ding.Ding;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +45,25 @@ public class TagRegistry {
 
         @Override
         public TagKey<Item> get() {
+            return tag;
+        }
+    }
+    public enum Blocks implements Supplier<TagKey<Block>> {
+        anvil;
+
+        private final TagKey<Block> tag;
+
+        Blocks() {
+            tag = BlockTags.create(Ding.id(name().toLowerCase(Locale.ROOT)));
+        }
+
+        /**
+         * Gets a result.
+         *
+         * @return a result
+         */
+        @Override
+        public TagKey<Block> get() {
             return tag;
         }
     }
